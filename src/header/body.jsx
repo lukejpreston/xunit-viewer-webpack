@@ -24,7 +24,24 @@ let Body = ({active, suites, onSearch, onStatToggle, onExpand, onCollapse, onSho
           data={stat.data}
         />
       })
-    }</div>
+    }
+    </div>
+    <div>
+      <div className='field'>
+        <label className='label'>XML Value</label>
+        <div className='control'>
+          <textarea className='textarea' placeholder='<testsuites>' />
+        </div>
+      </div>
+      <div className='field is-grouped'>
+        <div className='control'>
+          <button className='button is-link'>Parse</button>
+        </div>
+        <div className='control'>
+          <button className='button is-text'>Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 }
 
