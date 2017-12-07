@@ -1,8 +1,8 @@
 import React from 'react'
 
-let Icon = () => {
+let Icon = ({className = ''}) => {
   return <svg
-    className='icon is-large'
+    className={`icon is-large ${className}`}
     width='64'
     height='64'
     viewBox='0 0 64 64'

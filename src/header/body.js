@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Stat from './stat'
 import extractStats from './extract-stats'
+import styles from './styles'
 
 let Body = ({active, suites, onSearch, onStatToggle, onExpand, onCollapse, onShow, onHide, search, statsStatus}) => {
   let stats = extractStats(suites, search)
-  return <div className={`hero-body is-${active} size-${stats.length}`}>
+  return <div className={`hero-body ${styles.heroBody(active, stats.length)}`}>
     <div className='container'>{
       stats.map((stat, index) => {
         return <Stat
@@ -26,9 +27,9 @@ let Body = ({active, suites, onSearch, onStatToggle, onExpand, onCollapse, onSho
       })
     }
     </div>
-    <div>
+    <div className='container'>
       <div className='field'>
-        <label className='label'>XML Value</label>
+        <label className={`label ${styles.parseLabel()}`}>XML Value</label>
         <div className='control'>
           <textarea className='textarea' placeholder='<testsuites>' />
         </div>
@@ -38,7 +39,7 @@ let Body = ({active, suites, onSearch, onStatToggle, onExpand, onCollapse, onSho
           <button className='button is-link'>Parse</button>
         </div>
         <div className='control'>
-          <button className='button is-text'>Cancel</button>
+          <button className='button is-white'>Clear</button>
         </div>
       </div>
     </div>

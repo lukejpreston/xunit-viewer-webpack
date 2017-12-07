@@ -2,6 +2,9 @@ import React from 'react'; import PropTypes from 'prop-types'
 import Properties from './properties'
 import Test from './test'
 import iconMap from '../icon-map'
+import styles from './styles'
+import statusStyles from '../status-styles'
+import AngleDown from '../icons/angle-down'
 
 let Suite = ({
   uuid,
@@ -34,7 +37,7 @@ let Suite = ({
 
   let isCollapsed = Object.keys(collapsed.suites).includes(uuid) ? 'collapsed' : 'expanded'
 
-  let Content = <div className='card-content'>
+  let Content = <div className={`card-content ${styles[isCollapsed]()}`}>
     {Props}
     {suites}
     {tests.map(test =>
@@ -50,11 +53,20 @@ let Suite = ({
     )}
   </div>
 
-  if (Object.keys(properties).length === 1 && suites.length === 0 && tests.length === 0) Content = null
+  let Icon = <a className={`card-header-icon ${styles.cardHeaderIcon(isCollapsed)}`}>
+    <span className='icon'>
+      <AngleDown className={styles.cardHeaderIconIcon()} />
+    </span>
+  </a>
 
-  return <div className={`card suite is-${isCollapsed}`}>
+  if (Object.keys(properties).length === 1 && suites.length === 0 && tests.length === 0) {
+    Content = null
+    Icon = null
+  }
+
+  return <div className={`card ${styles.suite()} is-${isCollapsed}`}>
     <header
-      className={`card-header is-${status}`}
+      className={`card-header ${styles.cardHeader()} ${statusStyles[status]()}`}
       onClick={() => {
         onToggle({type: 'suites', uuid})
       }}
@@ -63,11 +75,7 @@ let Suite = ({
         {iconMap[status]}
         {name}
       </p>
-      <a className='card-header-icon'>
-        <span className='icon'>
-          <i className='fa fa-angle-down' />
-        </span>
-      </a>
+      {Icon}
     </header>
     {Content}
   </div>

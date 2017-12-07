@@ -1,7 +1,7 @@
 import React from 'react'; import PropTypes from 'prop-types'
 import Suite from './suite'
 import searchSuites from '../search-suites'
-
+import styles from './styles'
 import clone from 'clone'
 
 let hideSuites = (suites, hidden) => {
@@ -25,7 +25,7 @@ let hideSuites = (suites, hidden) => {
 let Suites = ({suites = [], search, collapsed, hidden, onToggle}) => {
   suites = searchSuites(suites, search)
   suites = hideSuites(suites, hidden)
-  return <section className='section suites'>
+  return <section className={`section ${styles.suites()}`}>
     <div className='container'>{
       suites.map(suite => <Suite
         collapsed={collapsed}

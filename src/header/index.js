@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Head from './head'
 import Body from './body'
+import styles from './styles'
 
 let Header = ({suites = [], title, onToggle, onStatToggle, onExpand, onCollapse, onShow, onHide, onSearch, isActive, search, statsStatus}) => {
   let active = isActive ? 'active' : 'inactive'
-  return <section className='hero'>
+  return <section className={`hero ${styles.hero()}`}>
     <Head
       title={title}
       active={active}
