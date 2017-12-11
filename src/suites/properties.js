@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles'
 import statusStyles from '../status-styles'
-import AngleDown from '../icons/angle-down'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/fontawesome-free-solid'
+import { faListAlt } from '@fortawesome/fontawesome-free-regular'
 
 let Row = ({name, value}) => {
   return <tr>
@@ -27,10 +29,13 @@ let Properties = ({data = {}, onToggle, collapsed}) => {
           uuid: data._uuid
         })
       }}>
-      <p className='card-header-title'>Properties</p>
+      <p className='card-header-title'>
+        <FontAwesomeIcon icon={faListAlt} />
+        <span className={styles.cardHeaderTitleLabel()}>Properties</span>
+      </p>
       <a className={`card-header-icon ${styles.cardHeaderIcon(isCollapsed)}`}>
         <span className='icon'>
-          <AngleDown className={styles.cardHeaderIconIcon()} />
+          <FontAwesomeIcon icon={faAngleDown} className={styles.cardHeaderIconIcon()} />
         </span>
       </a>
     </header>

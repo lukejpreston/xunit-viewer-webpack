@@ -4,7 +4,8 @@ import Test from './test'
 import iconMap from '../icon-map'
 import styles from './styles'
 import statusStyles from '../status-styles'
-import AngleDown from '../icons/angle-down'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/fontawesome-free-solid'
 
 let Suite = ({
   uuid,
@@ -55,7 +56,7 @@ let Suite = ({
 
   let Icon = <a className={`card-header-icon ${styles.cardHeaderIcon(isCollapsed)}`}>
     <span className='icon'>
-      <AngleDown className={styles.cardHeaderIconIcon()} />
+      <FontAwesomeIcon icon={faAngleDown} className={styles.cardHeaderIconIcon()} />
     </span>
   </a>
 
@@ -73,7 +74,7 @@ let Suite = ({
     >
       <p className='card-header-title'>
         {iconMap[status]}
-        {name}
+        <span className={styles.cardHeaderTitleLabel()}>{name}</span>
       </p>
       {Icon}
     </header>

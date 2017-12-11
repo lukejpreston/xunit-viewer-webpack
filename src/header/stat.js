@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Search from '../icons/search'
 import styles from './styles'
 import statusStyles from '../status-styles'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/fontawesome-free-solid'
 
 const Options = ({type, total, icon, onCollapse, onExpand, onHide, onShow}) => <div className='control'>
   <Total type={type} label={icon} total={total} />
@@ -46,7 +47,7 @@ const SelectVisible = ({onCollapse, onExpand}) => <div className={`select is-sma
 const SearchInput = ({onSearch, type}) => <div className='control has-icons-right'>
   <input className='input is-small' type='text' placeholder='Search' onChange={evt => onSearch(evt.target.value, type)} />
   <span className='icon is-medium is-right'>
-    <Search className={styles.statSearchIcon()} />
+    <FontAwesomeIcon icon={faSearch} />
   </span>
 </div>
 

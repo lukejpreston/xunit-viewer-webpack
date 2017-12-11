@@ -1,9 +1,6 @@
 import React from 'react'
-import Check from './icons/check'
-import Times from './icons/times'
-import Exclamation from './icons/exclamation'
-import Ban from './icons/ban'
-import Question from './icons/question'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faCheck, faTimes, faExclamation, faBan, faQuestion } from '@fortawesome/fontawesome-free-solid'
 
 import { StyleSheet, css } from 'aphrodite'
 
@@ -14,15 +11,15 @@ const styles = StyleSheet.create({
 })
 
 let Icon = ({children}) => {
-  return <i className='icon is-small'>
+  return <i className={`icon is-small ${css(styles.icon)}`}>
     {children}
   </i>
 }
 
 export default {
-  pass: <Icon ><Check className={css(styles.icon)} /></Icon>,
-  fail: <Icon ><Times className={css(styles.icon)} /></Icon>,
-  error: <Icon ><Exclamation className={css(styles.icon)} /></Icon>,
-  skip: <Icon ><Ban className={css(styles.icon)} /></Icon>,
-  unknown: <Icon ><Question className={css(styles.icon)} /></Icon>
+  pass: <Icon ><FontAwesomeIcon icon={faCheck} /></Icon>,
+  fail: <Icon ><FontAwesomeIcon icon={faTimes} /></Icon>,
+  error: <Icon ><FontAwesomeIcon icon={faExclamation} /></Icon>,
+  skip: <Icon ><FontAwesomeIcon icon={faBan} /></Icon>,
+  unknown: <Icon ><FontAwesomeIcon icon={faQuestion} /></Icon>
 }

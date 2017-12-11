@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
   cardHeaderIconIcon: {
     height: '100%'
   },
+  cardHeaderTitleLabel: {
+    'padding-left': 5
+  },
   test: {
     'margin-bottom': 10
   },
@@ -48,6 +51,7 @@ export default {
   cardHeader: () => css(styles.cardHeader),
   cardHeaderIconIcon: () => css(styles.cardHeaderIconIcon),
   cardHeaderIcon: (isCollapsed) => `${css(styles.cardHeaderIcon)} ${css(styles[`cardHeaderIcon-${isCollapsed}`])}`,
+  cardHeaderTitleLabel: () => css(styles.cardHeaderTitleLabel),
   test: () => css(styles.test),
   properties: () => css(styles.properties),
   propertiesTable: () => css(styles.propertiesTable),
