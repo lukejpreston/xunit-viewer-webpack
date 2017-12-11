@@ -1,98 +1,70 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import styles from './styles'
 import statusStyles from '../status-styles'
+import iconMap from '../icon-map'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/fontawesome-free-solid'
+import { faSearch, faAngleDown, faHashtag } from '@fortawesome/fontawesome-free-solid'
+import { faDotCircle, faCircle } from '@fortawesome/fontawesome-free-regular'
 
-const Options = ({type, total, icon, onCollapse, onExpand, onHide, onShow}) => <div className='control'>
-  <Total type={type} label={icon} total={total} />
-  <SelectVisible onCollapse={onCollapse} onExpand={onExpand} />
-  <SelectDisplay onHide={onHide} onShow={onShow} />
-</div>
-
-const Total = ({type, label, total}) => <div className={`tags has-addons ${styles.statTotal()}`}>
-  <span className={`tag ${statusStyles.static[type]()} ${styles.statTotalTag()}`}>{label}</span>
-  <span className={`tag is-info ${styles.statTotalTag()}`}>{total}</span>
-</div>
-
-const SelectDisplay = ({onHide, onShow}) => <div className={`select is-small ${styles.statSelect()}`}>
-  <select onChange={evt => {
-    switch (evt.target.value) {
-      case 'show':
-        return onShow()
-      case 'hide':
-        return onHide()
-    }
-  }}>
-    <option value='show'>Shown</option>
-    <option value='hide'>Hidden</option>
-  </select>
-</div>
-
-const SelectVisible = ({onCollapse, onExpand}) => <div className={`select is-small ${styles.statSelect()}`}>
-  <select onChange={evt => {
-    switch (evt.target.value) {
-      case 'expand':
-        return onExpand()
-      case 'collapse':
-        return onCollapse()
-    }
-  }}>
-    <option value='expand'>Expanded</option>
-    <option value='collapse'>Collapsed</option>
-  </select>
-</div>
-
-const SearchInput = ({onSearch, type}) => <div className='control has-icons-right'>
-  <input className='input is-small' type='text' placeholder='Search' onChange={evt => onSearch(evt.target.value, type)} />
-  <span className='icon is-medium is-right'>
-    <FontAwesomeIcon icon={faSearch} />
-  </span>
-</div>
-
-class Stat extends Component {
-  componentDidMount () {
-    const el = document.getElementById(`stat-${this.props.name}`)
-    console.log(el.scrollWidth, el.clientWidth)
-  }
-  componentDidUpdate () {
-    const el = document.getElementById(`stat-${this.props.name}`)
-    console.log(el)
-  }
-  render () {
-    return <div id={`stat-${this.props.name}`} className={`field is-grouped ${styles.stat()}`}>
-      <div className='control'>
-        <button className={`button is-link is-small ${styles.statLabel()}`}>{this.props.name}</button>
+const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide}) => {
+  return <div>
+    <div>
+      <button className={`button is-link ${styles.statButton()}`} onClick={() => onStatToggle(type)}>
+        <span>{name}</span>
+        <span className={`icon ${styles.statButtonAngle(status.active)}`} >
+          <FontAwesomeIcon icon={faAngleDown} />
+        </span>
+      </button>
+      <div className={`tags has-addons ${styles.count()}`}>
+        <span className={`tag is-medium is-info ${styles.countTag()}`}>
+          <span className='icon is-small is-right'>
+            <FontAwesomeIcon icon={faHashtag} />
+          </span>
+        </span>
+        <span className={`tag is-medium is-white ${styles.countTag()} ${styles.countTagNumber()}`}>{total}</span>
       </div>
-      <SearchInput onSearch={this.props.onSearch} type={this.props.type} />
-      <Options
-        icon='Total'
-        total={this.props.total}
-        type='default'
-        onCollapse={() => this.props.onCollapse({name: this.props.name, type: this.props.type})}
-        onExpand={() => this.props.onExpand({name: this.props.name, type: this.props.type})}
-        onHide={() => this.props.onHide({name: this.props.name, type: this.props.type})}
-        onShow={() => this.props.onShow({name: this.props.name, type: this.props.type})}
-      />
-      {this.props.data.map(d => <Options
-        {...d}
-        onCollapse={() => this.props.onCollapse({name: this.props.name, type: d.type})}
-        onExpand={() => this.props.onExpand({name: this.props.name, type: d.type})}
-        onHide={() => this.props.onHide({name: this.props.name, type: d.type})}
-        onShow={() => this.props.onShow({name: this.props.name, type: d.type})}
-      />)}
+      {data.map(d => <div key={`stat-count-${name}-${d.type}`}className={`tags has-addons ${styles.count()}`}>
+        <span className={`tag is-medium ${statusStyles.static[d.type]()} ${styles.countTag()}`}>{iconMap[d.type]}</span>
+        <span className={`tag is-medium is-white ${styles.countTag()} ${styles.countTagNumber()}`}>{d.total}</span>
+      </div>)}
     </div>
-  }
-}
-
-Stat.defaultProps = {
-  data: []
+    <div className={styles.statBody(status.active)}>
+      <div className={`control has-icons-right ${styles.statSearch()}`}>
+        <input className='input' type='text' placeholder='Search' onChange={evt => onSearch(evt.target.value, type)} />
+        <span className='icon is-small is-right'>
+          <FontAwesomeIcon icon={faSearch} />
+        </span>
+      </div>
+      <div>
+        <button className={`button ${status.expanded === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onExpand({name, type}) }}>
+          <span className='icon'>
+            <FontAwesomeIcon icon={status.expanded === 'active' ? faDotCircle : faCircle} />
+          </span>
+          <span>Expanded</span>
+        </button>
+        <button className={`button ${status.collapsed === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onCollapse({name, type}) }}>
+          <span className='icon'>
+            <FontAwesomeIcon icon={status.collapsed === 'active' ? faDotCircle : faCircle} />
+          </span>
+          <span>Collapsed</span>
+        </button>
+      </div>
+      <div>
+        <button className={`button ${status.shown === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onShow({name, type}) }}>
+          <span className='icon'>
+            <FontAwesomeIcon icon={status.shown === 'active' ? faDotCircle : faCircle} />
+          </span>
+          <span>Shown</span>
+        </button>
+        <button className={`button ${status.hidden === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onHide({name, type}) }}>
+          <span className='icon'>
+            <FontAwesomeIcon icon={status.hidden === 'active' ? faDotCircle : faCircle} />
+          </span>
+          <span>Hidden</span>
+        </button>
+      </div>
+    </div>
+  </div>
 }
 
 export default Stat
-
-// onCollapse
-// onExpand
-// onHide
-// onShow

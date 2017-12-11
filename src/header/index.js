@@ -12,6 +12,7 @@ let Header = ({suites = [], title, onToggle, onStatToggle, onExpand, onCollapse,
       active={active}
       onToggle={onToggle} />
     <Body
+      onStatToggle={onStatToggle}
       statsStatus={statsStatus}
       suites={suites}
       active={active}
@@ -20,7 +21,6 @@ let Header = ({suites = [], title, onToggle, onStatToggle, onExpand, onCollapse,
       onCollapse={onCollapse}
       onShow={onShow}
       onHide={onHide}
-      onStatToggle={onStatToggle}
       search={search} />
   </section>
 }

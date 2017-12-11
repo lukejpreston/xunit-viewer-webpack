@@ -33,12 +33,34 @@ class XunitViewer extends React.Component {
     })
 
     this.state = {
+      statStatus: {
+        suites: {
+          active: 'inactive',
+          expanded: 'active',
+          collapsed: 'inactive',
+          shown: 'active',
+          hidden: 'inactive'
+        },
+        tests: {
+          active: 'inactive',
+          expanded: 'active',
+          collapsed: 'inactive',
+          shown: 'active',
+          hidden: 'inactive'
+        },
+        properties: {
+          active: 'inactive',
+          expanded: 'active',
+          collapsed: 'inactive',
+          shown: 'active',
+          hidden: 'inactive'
+        }
+      },
       title: props.title,
       suites: props.suites,
       uuids,
       header: {
-        active: true,
-        statsStatus: {}
+        active: true
       },
       search: {
         suites: '',
@@ -61,6 +83,7 @@ class XunitViewer extends React.Component {
     return <div>
       <Header
         title={this.state.title}
+        statsStatus={this.state.statStatus}
         suites={this.state.suites}
         search={this.state.search}
         onSearch={(value, type) => {
@@ -73,18 +96,10 @@ class XunitViewer extends React.Component {
           header.active = !header.active
           this.setState({header})
         }}
-        onStatToggle={({name, type}) => {
-          name = name.toLowerCase()
-          let statsStatus = this.state.header.statsStatus
-          statsStatus[name] = statsStatus[name] || {}
-          if (statsStatus[name][type]) delete statsStatus[name][type]
-          else statsStatus[name][type] = true
-          this.setState({
-            header: {
-              active: this.state.header.active,
-              statsStatus
-            }
-          })
+        onStatToggle={(type) => {
+          let statStatus = this.state.statStatus
+          statStatus[type].active = statStatus[type].active === 'active' ? 'inactive' : 'active'
+          this.setState({statStatus})
         }}
         onExpand={({name, type}) => {
           name = name.toLowerCase()
@@ -105,7 +120,10 @@ class XunitViewer extends React.Component {
             })
           }
 
-          this.setState({collapsed})
+          let statStatus = this.state.statStatus
+          statStatus[type].expanded = statStatus[type].expanded = 'active'
+          statStatus[type].collapsed = statStatus[type].collapsed = 'inactive'
+          this.setState({statStatus, collapsed})
         }}
         onCollapse={({name, type}) => {
           name = name.toLowerCase()
@@ -124,7 +142,10 @@ class XunitViewer extends React.Component {
               collapsed[name][uuid] = true
             })
           }
-          this.setState({collapsed})
+          let statStatus = this.state.statStatus
+          statStatus[type].expanded = statStatus[type].expanded = 'inactive'
+          statStatus[type].collapsed = statStatus[type].collapsed = 'active'
+          this.setState({statStatus, collapsed})
         }}
         onShow={({name, type}) => {
           name = name.toLowerCase()
@@ -145,7 +166,10 @@ class XunitViewer extends React.Component {
             })
           }
 
-          this.setState({hidden})
+          let statStatus = this.state.statStatus
+          statStatus[type].hidden = statStatus[type].hidden = 'inactive'
+          statStatus[type].shown = statStatus[type].shown = 'active'
+          this.setState({statStatus, hidden})
         }}
         onHide={({name, type}) => {
           name = name.toLowerCase()
@@ -164,10 +188,13 @@ class XunitViewer extends React.Component {
               hidden[name][uuid] = true
             })
           }
-          this.setState({hidden})
+
+          let statStatus = this.state.statStatus
+          statStatus[type].hidden = statStatus[type].hidden = 'active'
+          statStatus[type].shown = statStatus[type].shown = 'inactive'
+          this.setState({statStatus, hidden})
         }}
         isActive={this.state.header.active}
-        statsStatus={this.state.header.statsStatus}
       />
       <Suites
         suites={this.state.suites}
@@ -186,7 +213,8 @@ class XunitViewer extends React.Component {
 }
 
 XunitViewer.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  suites: PropTypes.array.isRequired
 }
 
 export default XunitViewer
