@@ -1,6 +1,17 @@
 const parseString = require('xml2js-parser').parseStringSync
 const toLaxTitleCase = require('titlecase').toLaxTitleCase
-const uuid = require('uuid/v4')
+const md5 = require('md5')
+
+const md5s = []
+
+const uniqueRepeatableMd5 = (str) => {
+  const value = md5(str)
+  if (md5s.includes(value)) return uniqueRepeatableMd5(`${str}*`)
+  else {
+    md5s.push(value)
+    return value
+  }
+}
 
 const xml2js = (xml) => {
   let data = parseString(xml)
@@ -42,6 +53,7 @@ const expandMeta = (thing) => {
 }
 
 const buildProperties = (suite) => {
+  let md5Name = ''
   let properties = {}
   if (suite.properties) {
     suite.properties
@@ -52,10 +64,11 @@ const buildProperties = (suite) => {
         property.property.forEach(prop => {
           let meta = prop['$']
           properties[meta.name] = meta.value
+          md5Name += `${meta.name} ${meta.value}`
         })
       })
   }
-  properties._uuid = uuid()
+  properties._uuid = uniqueRepeatableMd5(md5Name)
   return properties
 }
 
@@ -118,7 +131,7 @@ const buildTest = (test) => {
   extractTestCore(test, 'skipping', 'skip')
   extractTestCore(test, 'skip', 'skip')
 
-  test._uuid = uuid()
+  test._uuid = uniqueRepeatableMd5(`${test.classname} ${test.name} ${test.status} ${test.time} ${test.message}`)
   return test
 }
 
@@ -195,7 +208,7 @@ const buildSuites = (suites) => {
       if (suite.count.tests > 0 && suite.count.tests === suite.count.unknown) suite.status = 'unknown'
       if (suite.count.tests === 0) suite.status = 'pass'
 
-      suite._uuid = uuid()
+      suite._uuid = uniqueRepeatableMd5(`${suite.name} ${suite.timestamp} ${suite.time} ${suite.status}`)
       return suite
     })
 }
