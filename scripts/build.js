@@ -92,7 +92,8 @@ measureFileSizesBeforeBuild(paths.appBuild)
         buildFolder,
         useYarn
       )
-      console.log('done')
+
+      singleFile()
     },
     err => {
       console.log(chalk.red('Failed to compile.\n'))
@@ -148,4 +149,25 @@ function copyPublicFolder () {
     dereference: true,
     filter: file => file !== paths.appHtml
   })
+}
+
+const singleFile = () => {
+  const cssPath = path.join(paths.appBuild, 'static/css/main.css')
+  const css = fs.readFileSync(cssPath).toString()
+
+  const jsPath = path.join(paths.appBuild, 'static/js/main.js')
+  const js = fs.readFileSync(jsPath).toString()
+
+  const indexPath = path.join(paths.appBuild, 'index.html')
+  const index = fs.readFileSync(indexPath).toString()
+
+  let newIndex = index
+    .replace('<link href="/static/css/main.css" rel="stylesheet">', `<style>${css}</style>`)
+    .replace('<script type="text/javascript" src="/static/js/main.js"></script>', '')
+    .replace('</body></html>', '')
+
+  newIndex += `<script>${js}</script>`
+  newIndex += '</body></html>'
+
+  fs.writeFileSync(path.join(paths.appBuild, 'index.html'), newIndex)
 }
