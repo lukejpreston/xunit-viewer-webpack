@@ -8,30 +8,7 @@ const knownStatuses = ['pass', 'fail', 'error', 'skip']
 class XunitViewer extends React.Component {
   constructor (props) {
     super(props)
-    let uuids = {
-      suites: {},
-      properties: {},
-      tests: {}
-    }
-    props.suites.forEach(suite => {
-      let suiteStatus = knownStatuses.includes(suite.status) ? suite.status : 'unknown'
-      uuids.suites[suiteStatus] = uuids.suites[suiteStatus] || []
-      uuids.suites[suiteStatus].push(suite._uuid)
-
-      if (suite.properties) {
-        uuids.properties.properties = uuids.properties.properties || []
-        uuids.properties.properties.push(suite.properties._uuid)
-      }
-
-      if (suite.tests) {
-        suite.tests.forEach(test => {
-          let testStatus = knownStatuses.includes(test.status) ? test.status : 'unknown'
-          uuids.tests[testStatus] = uuids.tests[testStatus] || []
-          uuids.tests[testStatus].push(test._uuid)
-        })
-      }
-    })
-
+    const mappedProps = this.mapProps(props)
     this.state = {
       statStatus: {
         suites: {
@@ -56,9 +33,9 @@ class XunitViewer extends React.Component {
           hidden: 'inactive'
         }
       },
-      title: props.title,
-      suites: props.suites,
-      uuids,
+      title: mappedProps.title,
+      suites: mappedProps.suites,
+      uuids: mappedProps.uuids,
       header: {
         active: true
       },
@@ -78,6 +55,42 @@ class XunitViewer extends React.Component {
         properties: {}
       }
     }
+  }
+  mapProps (props) {
+    let uuids = {
+      suites: {},
+      properties: {},
+      tests: {}
+    }
+    props.suites.forEach(suite => {
+      let suiteStatus = knownStatuses.includes(suite.status) ? suite.status : 'unknown'
+      uuids.suites[suiteStatus] = uuids.suites[suiteStatus] || []
+      uuids.suites[suiteStatus].push(suite._uuid)
+
+      if (suite.properties) {
+        uuids.properties.properties = uuids.properties.properties || []
+        uuids.properties.properties.push(suite.properties._uuid)
+      }
+
+      if (suite.tests) {
+        suite.tests.forEach(test => {
+          let testStatus = knownStatuses.includes(test.status) ? test.status : 'unknown'
+          uuids.tests[testStatus] = uuids.tests[testStatus] || []
+          uuids.tests[testStatus].push(test._uuid)
+        })
+      }
+    })
+    return {
+      uuids, suites: props.suites, title: props.title
+    }
+  }
+  componentWillReceiveProps (props) {
+    const mappedProps = this.mapProps(props)
+    this.setState({
+      title: mappedProps.title,
+      suites: mappedProps.suites,
+      uuids: mappedProps.uuids
+    })
   }
   render () {
     return <div>

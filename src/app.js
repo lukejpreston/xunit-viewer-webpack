@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import XunitViewer from './xunit-viewer'
 
 import parser from './parser'
-const suites = parser.parse(`
+const suitesPromise = parser.parse(`
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
     <!-- standard test suite -->
@@ -117,8 +117,21 @@ const suites = parser.parse(`
 
 `)
 
-const App = () => {
-  return <XunitViewer suites={suites} />
+class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {suites: []}
+  }
+  componentDidMount () {
+    suitesPromise
+      .then(suites => {
+        this.setState({suites: suites})
+      })
+      .catch(err => alert(err))
+  }
+  render () {
+    return <XunitViewer suites={this.state.suites} title='Xunit Viewer' />
+  }
 }
 
 export default App

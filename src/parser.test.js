@@ -9,15 +9,17 @@ const getInput = (name) => {
   return fs.readFileSync(path.join(data, `${name}.xml`)).toString()
 }
 
-describe('parser', () => {
-  let input = getInput('special_chars_suite')
-  let parsed = parser.parse(input)
+let input = getInput('special_chars_suite')
 
-  it('works', () => {
-    expect(parsed).toEqual(output)
-  })
+test('works', () => {
+  return parser.parse(input)
+    .then((parsed) => {
+      expect(parsed).toEqual(output)
+    })
+})
 
-  it('works for special chars in suite name', () => {
+test('works for special chars in suite name', () => {
+  return parser.parse(input).then((parsed) => {
     expect(parsed[1].name).toEqual('@release2017.1.0,, @Mcc272151_10: Display List of Records')
   })
 })

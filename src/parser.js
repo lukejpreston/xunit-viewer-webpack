@@ -1,4 +1,4 @@
-const parseString = require('xml2js-parser').parseStringSync
+const parseString = require('xml2js').parseString
 const toLaxTitleCase = require('titlecase').toLaxTitleCase
 const md5 = require('md5')
 
@@ -14,8 +14,15 @@ const uniqueRepeatableMd5 = (str) => {
 }
 
 const xml2js = (xml) => {
-  let data = parseString(xml)
+  return new Promise((resolve, reject) => {
+    parseString(xml, (err, result) => {
+      if (err !== null) reject(err)
+      else resolve(result)
+    })
+  })
+}
 
+const xunitViewer = (data) => {
   let suites = []
   if (data.testsuites && data.testsuites.testsuite) {
     if (Array.isArray(data.testsuites.testsuite)) suites = data.testsuites.testsuite
@@ -215,7 +222,8 @@ const buildSuites = (suites) => {
 
 module.exports = {
   parse (xml) {
-    let suites = xml2js(xml)
-    return buildSuites(suites)
+    return xml2js(xml)
+      .then(xunitViewer)
+      .then(buildSuites)
   }
 }

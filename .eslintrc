@@ -4,6 +4,7 @@
       "standard-react"
     ],
     "env": {
+      "jest": true,
       "jasmine": true,
       "browser": true
     }
