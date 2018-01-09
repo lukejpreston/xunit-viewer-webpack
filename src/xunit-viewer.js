@@ -206,7 +206,7 @@ class XunitViewer extends React.Component {
           this.setState({statStatus, hidden})
         }}
         isActive={this.state.header.active}
-        onXmlInputChange={(evt) => {
+        onXmlChange={(evt) => {
           const xml = evt.target.value
           parser
             .parse(xml)
