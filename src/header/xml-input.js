@@ -1,17 +1,29 @@
-import React from 'react'
+import React, {Component} from 'react'
+import CodeMirror from 'codemirror'
+import '../../node_modules/codemirror/lib/codemirror.css'
+import '../../node_modules/codemirror/mode/xml/xml'
+import '../../node_modules/codemirror/theme/dracula.css'
 import PropTypes from 'prop-types'
-import styles from './styles'
 
-const XmlInput = ({onXmlChange, xml}) => <div className='field'>
-  <label className='label has-text-white'>XML Test Suites</label>
-  <div className='control'>
-    <textarea
-      onChange={onXmlChange}
-      className={`${styles.xmlInput()} textarea`}
-      placeholder='<testsuites></testsuites>'
-      defaultValue={xml} />
-  </div>
-</div>
+class XmlInput extends Component {
+  componentDidMount () {
+    const codeMirror = CodeMirror.fromTextArea(document.getElementById('xml'), {
+      lineNumbers: true,
+      theme: 'dracula',
+      mode: 'xml'
+    })
+    codeMirror.on('change', () => {
+      this.props.onXmlChange(codeMirror.getValue())
+    })
+    codeMirror.setSize(null, 120)
+  }
+  render () {
+    return <div>
+      <label className='label has-text-white'>XML Test Suites</label>
+      <textarea defaultValue={this.props.xml} id='xml' ref={textArea => { this.textArea = textArea }} />
+    </div>
+  }
+}
 
 XmlInput.propTypes = {
   onXmlChange: PropTypes.func.isRequired,
@@ -19,3 +31,5 @@ XmlInput.propTypes = {
 }
 
 export default XmlInput
+
+// onChange={this.props.onXmlChange}
