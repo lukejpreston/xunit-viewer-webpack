@@ -69,9 +69,9 @@ const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onE
 }
 
 Stat.propTypes = {
-  status: PropTypes.string.isRequired,
+  status: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
-  total: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
   data: PropTypes.array,
   type: PropTypes.string.isRequired,
   onStatToggle: PropTypes.func.isRequired,

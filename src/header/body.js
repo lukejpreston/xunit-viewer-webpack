@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Stat from './stat'
+import XmlInput from './xml-input'
 import extractStats from './extract-stats'
 import styles from './styles'
 
-let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, search, statsStatus}) => {
+let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, search, statsStatus, onXmlInputChange, xml}) => {
   let stats = extractStats(suites, search)
 
   return <div className={`hero-body ${styles.heroBody(active, stats.length, statsStatus)}`}>
@@ -24,8 +25,8 @@ let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onSho
         icon={stat.icon}
         data={stat.data}
       />)}
+      <XmlInput onXmlInputChange={onXmlInputChange} xml={xml} />
     </div>
-
   </div>
 }
 

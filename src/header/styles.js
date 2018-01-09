@@ -98,41 +98,44 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     transition: 'height 0.2s'
   },
+  'heroBody-active-0-stats-0': {
+    height: 160
+  },
   'heroBody-active-1-stats-0': {
-    height: 41 * 1 + 0 * 130 + 5
+    height: 41 * 1 + 0 * 130 + 5 + 160
   },
   'heroBody-active-1-stats-1': {
-    height: 41 * 1 + 1 * 130 + 5
+    height: 41 * 1 + 1 * 130 + 5 + 160
   },
   'heroBody-active-1-stats-2': {
-    height: 41 * 1 + 2 * 130 + 5
+    height: 41 * 1 + 2 * 130 + 5 + 160
   },
   'heroBody-active-1-stats-3': {
-    height: 41 * 2 + 3 * 130 + 5
+    height: 41 * 2 + 3 * 130 + 5 + 160
   },
   'heroBody-active-2-stats-0': {
-    height: 41 * 2 + 0 * 130 + 5
+    height: 41 * 2 + 0 * 130 + 5 + 160
   },
   'heroBody-active-2-stats-1': {
-    height: 41 * 2 + 1 * 130 + 5
+    height: 41 * 2 + 1 * 130 + 5 + 160
   },
   'heroBody-active-2-stats-2': {
-    height: 41 * 2 + 2 * 130 + 5
+    height: 41 * 2 + 2 * 130 + 5 + 160
   },
   'heroBody-active-2-stats-3': {
-    height: 41 * 2 + 3 * 130 + 5
+    height: 41 * 2 + 3 * 130 + 5 + 160
   },
   'heroBody-active-3-stats-0': {
-    height: 41 * 3
+    height: 41 * 3 + 160
   },
   'heroBody-active-3-stats-1': {
-    height: 41 * 3 + 130 + 5
+    height: 41 * 3 + 130 + 5 + 160
   },
   'heroBody-active-3-stats-2': {
-    height: 41 * 3 + 2 * 130 + 10
+    height: 41 * 3 + 2 * 130 + 10 + 160
   },
   'heroBody-active-3-stats-3': {
-    height: 41 * 3 + 3 * 130 + 5
+    height: 41 * 3 + 3 * 130 + 5 + 160
   },
   statBody: {
     overflow: 'hidden',
@@ -178,7 +181,8 @@ const styles = StyleSheet.create({
   },
   countTagNumber: {
     'min-width': 50
-  }
+  },
+  xmlinput: {}
 })
 
 export default {
@@ -201,5 +205,6 @@ export default {
   statRadio: () => css(styles.statRadio),
   count: () => css(styles.count),
   countTag: () => css(styles.countTag),
-  countTagNumber: () => css(styles.countTagNumber)
+  countTagNumber: () => css(styles.countTagNumber),
+  xmlInput: () => css(styles.xmlinput)
 }

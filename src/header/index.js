@@ -4,7 +4,7 @@ import Head from './head'
 import Body from './body'
 import styles from './styles'
 
-let Header = ({suites = [], title, onToggle, onStatToggle, onExpand, onCollapse, onShow, onHide, onSearch, isActive, search, statsStatus}) => {
+let Header = ({suites = [], title, onToggle, onStatToggle, onExpand, onCollapse, onShow, onHide, onSearch, isActive, search, statsStatus, onXmlInputChange, xml}) => {
   let active = isActive ? 'active' : 'inactive'
   return <section className={`hero ${styles.hero()}`}>
     <Head
@@ -21,7 +21,9 @@ let Header = ({suites = [], title, onToggle, onStatToggle, onExpand, onCollapse,
       onCollapse={onCollapse}
       onShow={onShow}
       onHide={onHide}
-      search={search} />
+      search={search}
+      onXmlInputChange={onXmlInputChange}
+      xml={xml} />
   </section>
 }
 
