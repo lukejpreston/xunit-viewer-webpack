@@ -20,6 +20,7 @@ class XmlInput extends Component {
   render () {
     return <div>
       <label className='label has-text-white'>XML Test Suites</label>
+      <button className='button is-link is-fullwidth'>Hide</button>
       <textarea defaultValue={this.props.xml} id='xml' ref={textArea => { this.textArea = textArea }} />
     </div>
   }
@@ -31,5 +32,3 @@ XmlInput.propTypes = {
 }
 
 export default XmlInput
-
-// onChange={this.props.onXmlChange}

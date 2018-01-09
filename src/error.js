@@ -31,11 +31,11 @@ class Error extends Component {
           </div>
           <h4>Error</h4>
           <pre className={css(styles[`error-is-${this.state.message}`])}>
-            <button className={`${css(styles.button)} button is-info is-fullwidth`} onClick={() => this.showStack()}>Show Stack</button>
+            <button className={`${css(styles.button)} button is-link is-fullwidth`} onClick={() => this.showStack()}>Show Stack</button>
             {this.props.err.message || 'Unkown Error'}
           </pre>
           <pre className={css(styles[`error-is-${this.state.stack}`])}>
-            <button className={`${css(styles.button)} button is-info is-fullwidth`} onClick={() => this.hideStack()}>Hide Stack</button>
+            <button className={`${css(styles.button)} button is-link is-fullwidth`} onClick={() => this.hideStack()}>Hide Stack</button>
             {this.props.err.stack || 'Unkown Error'}
           </pre>
           <h4>Input</h4>
