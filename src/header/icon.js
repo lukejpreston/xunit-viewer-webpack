@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 let Icon = ({className = ''}) => {
   return <svg
@@ -72,6 +73,10 @@ let Icon = ({className = ''}) => {
     V
     </text>
   </svg>
+}
+
+Icon.propTypes = {
+  className: PropTypes.string
 }
 
 export default Icon

@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes, faExclamation, faBan, faQuestion } from '@fortawesome/fontawesome-free-solid'
-
 import { StyleSheet, css } from 'aphrodite'
 
 const styles = StyleSheet.create({
@@ -14,6 +14,10 @@ let Icon = ({children}) => {
   return <i className={`icon is-small ${css(styles.icon)}`}>
     {children}
   </i>
+}
+
+Icon.propTypes = {
+  children: PropTypes.any
 }
 
 export default {

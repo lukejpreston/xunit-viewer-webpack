@@ -32,6 +32,7 @@ let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onSho
 Body.propTypes = {
   active: PropTypes.string,
   suites: PropTypes.array,
+  onStatToggle: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
   onExpand: PropTypes.func.isRequired,
   onCollapse: PropTypes.func.isRequired,

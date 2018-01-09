@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './styles'
 import statusStyles from '../status-styles'
 import iconMap from '../icon-map'
@@ -65,6 +66,20 @@ const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onE
       </div>
     </div>
   </div>
+}
+
+Stat.propTypes = {
+  status: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  total: PropTypes.string.isRequired,
+  data: PropTypes.array,
+  type: PropTypes.string.isRequired,
+  onStatToggle: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  onExpand: PropTypes.func.isRequired,
+  onCollapse: PropTypes.func.isRequired,
+  onShow: PropTypes.func.isRequired,
+  onHide: PropTypes.func.isRequired
 }
 
 export default Stat
