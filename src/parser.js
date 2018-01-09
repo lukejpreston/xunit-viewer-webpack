@@ -16,8 +16,10 @@ const uniqueRepeatableMd5 = (str) => {
 const xml2js = (xml) => {
   return new Promise((resolve, reject) => {
     parseString(xml, (err, result) => {
-      if (err !== null) reject(err)
-      else resolve(result)
+      if (err !== null) {
+        err.xml = xml
+        reject(err)
+      } else resolve(result)
     })
   })
 }

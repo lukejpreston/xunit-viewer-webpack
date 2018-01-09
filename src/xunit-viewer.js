@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Header from './header'
+import Error from './error'
 import Suites from './suites'
 
 const knownStatuses = ['pass', 'fail', 'error', 'skip']
@@ -209,25 +210,27 @@ class XunitViewer extends React.Component {
         }}
         isActive={this.state.header.active}
       />
-      <Suites
-        suites={this.state.suites}
-        search={this.state.search}
-        hidden={this.state.hidden}
-        collapsed={this.state.collapsed}
-        onToggle={({type, uuid}) => {
-          let collapsed = this.state.collapsed
-          if (collapsed[type][uuid]) delete collapsed[type][uuid]
-          else collapsed[type][uuid] = true
-          this.setState({collapsed})
-        }}
-      />
+      {this.props.err ? <Error err={this.props.err} xml={this.props.xml} />
+        : <Suites
+          suites={this.state.suites}
+          search={this.state.search}
+          hidden={this.state.hidden}
+          collapsed={this.state.collapsed}
+          onToggle={({type, uuid}) => {
+            let collapsed = this.state.collapsed
+            if (collapsed[type][uuid]) delete collapsed[type][uuid]
+            else collapsed[type][uuid] = true
+            this.setState({collapsed})
+          }}
+        />
+      }
     </div>
   }
 }
 
 XunitViewer.propTypes = {
-  title: PropTypes.string,
-  suites: PropTypes.array.isRequired
+  xml: PropTypes.string,
+  err: PropTypes.object
 }
 
 export default XunitViewer
