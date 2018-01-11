@@ -5,10 +5,10 @@ import XmlInput from './xml-input'
 import extractStats from './extract-stats'
 import styles from './styles'
 
-let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, search, statsStatus, onXmlChange, xml}) => {
+let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, search, statsStatus, onXmlInput, xml, xmlActive}) => {
   let stats = extractStats(suites, search)
 
-  return <div className={`hero-body ${styles.heroBody(active, stats.length, statsStatus)}`}>
+  return <div className={`hero-body ${styles.heroBody(active, stats.length, statsStatus, xmlActive)}`}>
     <div className='container'>
       {stats.map(stat => <Stat
         key={`stat-${stat.name}`}
@@ -25,7 +25,7 @@ let Body = ({active, suites, onStatToggle, onSearch, onExpand, onCollapse, onSho
         icon={stat.icon}
         data={stat.data}
       />)}
-      <XmlInput onXmlChange={onXmlChange} xml={xml} />
+      <XmlInput onXmlInput={onXmlInput} xml={xml} active={xmlActive} />
     </div>
   </div>
 }
@@ -41,8 +41,9 @@ Body.propTypes = {
   onHide: PropTypes.func.isRequired,
   search: PropTypes.object.isRequired,
   statsStatus: PropTypes.object.isRequired,
-  onXmlChange: PropTypes.func.isRequired,
-  xml: PropTypes.string
+  onXmlInput: PropTypes.func.isRequired,
+  xml: PropTypes.string,
+  xmlActive: PropTypes.string
 }
 
 export default Body

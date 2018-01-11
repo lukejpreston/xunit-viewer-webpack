@@ -1,34 +1,23 @@
-import React, {Component} from 'react'
-import CodeMirror from 'codemirror'
-import '../../node_modules/codemirror/lib/codemirror.css'
-import '../../node_modules/codemirror/mode/xml/xml'
-import '../../node_modules/codemirror/theme/dracula.css'
+import React from 'react'
 import PropTypes from 'prop-types'
+import styles from './styles'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/fontawesome-free-solid'
 
-class XmlInput extends Component {
-  componentDidMount () {
-    const codeMirror = CodeMirror.fromTextArea(document.getElementById('xml'), {
-      lineNumbers: true,
-      theme: 'dracula',
-      mode: 'xml'
-    })
-    codeMirror.on('change', () => {
-      this.props.onXmlChange(codeMirror.getValue())
-    })
-    codeMirror.setSize(null, 120)
-  }
-  render () {
-    return <div>
-      <label className='label has-text-white'>XML Test Suites</label>
-      <button className='button is-link is-fullwidth'>Hide</button>
-      <textarea defaultValue={this.props.xml} id='xml' ref={textArea => { this.textArea = textArea }} />
-    </div>
-  }
-}
+const XmlInput = ({active, xml, onXmlInput}) => <div>
+  <button className={`button is-link ${styles.statButton()}`} onClick={() => onXmlInput()}>
+    <span>XML Test Suites</span>
+    <span className={`icon ${styles.statButtonAngle(active)}`} >
+      <FontAwesomeIcon icon={faAngleDown} />
+    </span>
+  </button>
+  <textarea defaultValue={xml} id='xml' ref={textArea => { this.textArea = textArea }} />
+</div>
 
 XmlInput.propTypes = {
-  onXmlChange: PropTypes.func.isRequired,
-  xml: PropTypes.string
+  onXmlInput: PropTypes.func.isRequired,
+  xml: PropTypes.string,
+  active: PropTypes.string.isRequired
 }
 
 export default XmlInput

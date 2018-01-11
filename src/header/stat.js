@@ -7,7 +7,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faSearch, faAngleDown, faHashtag } from '@fortawesome/fontawesome-free-solid'
 import { faDotCircle, faCircle } from '@fortawesome/fontawesome-free-regular'
 
-const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide}) => {
+const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, xmlActive}) => {
   return <div>
     <div>
       <button className={`button is-link ${styles.statButton()}`} onClick={() => onStatToggle(type)}>

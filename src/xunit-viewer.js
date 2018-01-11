@@ -4,6 +4,10 @@ import Header from './header'
 import Error from './error'
 import Suites from './suites'
 import parser from './parser'
+import CodeMirror from 'codemirror'
+import '../node_modules/codemirror/lib/codemirror.css'
+import '../node_modules/codemirror/mode/xml/xml'
+import '../node_modules/codemirror/theme/dracula.css'
 
 const knownStatuses = ['pass', 'fail', 'error', 'skip']
 
@@ -12,6 +16,7 @@ class XunitViewer extends React.Component {
     super(props)
     this.state = {
       xml: props.xml,
+      xmlActive: 'active',
       statStatus: {
         suites: {
           active: 'inactive',
@@ -85,6 +90,22 @@ class XunitViewer extends React.Component {
     this.setState({xml, uuids, suites, err: null})
   }
   componentDidMount () {
+    const codeMirror = CodeMirror.fromTextArea(document.getElementById('xml'), {
+      lineNumbers: true,
+      theme: 'dracula',
+      mode: 'xml'
+    })
+    this.codeMirror = codeMirror
+    codeMirror.on('change', () => {
+      const xml = codeMirror.getValue()
+      parser
+        .parse(xml)
+        .then(result => this.updateWithXml(xml, result))
+        .catch(err => this.setState({xml, err}))
+    })
+    codeMirror.setSize(null, 120)
+    window.codeMirror = codeMirror
+    codeMirror.getWrapperElement().style.transition = 'height 0.2s'
     parser
       .parse(this.state.xml)
       .then(result => this.updateWithXml(this.state.xml, result))
@@ -206,13 +227,13 @@ class XunitViewer extends React.Component {
           this.setState({statStatus, hidden})
         }}
         isActive={this.state.header.active}
-        onXmlChange={xml => {
-          parser
-            .parse(xml)
-            .then(result => this.updateWithXml(xml, result))
-            .catch(err => this.setState({xml, err}))
+        onXmlInput={() => {
+          const xmlActive = this.state.xmlActive === 'active' ? 'inactive' : 'active'
+          this.codeMirror.setSize(null, xmlActive === 'inactive' ? 0 : 120)
+          this.setState({xmlActive})
         }}
         xml={this.state.xml}
+        xmlActive={this.state.xmlActive}
       />
       {this.state.err ? <Error err={this.state.err} xml={this.state.xml} />
         : <Suites
