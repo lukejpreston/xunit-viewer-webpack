@@ -42,7 +42,8 @@ Header.propTypes = {
   search: PropTypes.object.isRequired,
   statsStatus: PropTypes.object,
   onXmlInput: PropTypes.func.isRequired,
-  xml: PropTypes.string
+  xml: PropTypes.string,
+  xmlActive: PropTypes.string
 }
 
 export default Header
