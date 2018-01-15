@@ -178,16 +178,18 @@ const styles = StyleSheet.create({
     height: 41 * 3 + 3 * 130 + 5 + 45
   },
 
-  statBody: {
-    display: 'inline-block',
+  stat: {
     overflow: 'hidden',
     transition: 'height 0.2s'
   },
-  'statBody-active': {
-    height: 135
+  'stat-active': {
+    height: 168
   },
-  'statBody-inactive': {
-    height: 0
+  'stat-inactive': {
+    height: 40
+  },
+  statBody: {
+    display: 'inline-block'
   },
   statBodyToggles: {
     display: 'inline-block',
@@ -235,8 +237,7 @@ const styles = StyleSheet.create({
   },
   'countTagNumber-active': {
     'min-width': 221
-  },
-  xmlinput: {}
+  }
 })
 
 export default {
@@ -252,7 +253,8 @@ export default {
     const activeStats = Object.keys(status).filter(key => status[key].active === 'active').length
     return `${css(styles.heroBody)} ${css(styles[`heroBody-${active}-${size}-stats-${activeStats}-xml-${xmlActive}`])}`
   },
-  statBody: (active) => `${css(styles.statBody)} ${css(styles[`statBody-${active}`])}`,
+  stat: (active) => `${css(styles.stat)} ${css(styles[`stat-${active}`])}`,
+  statBody: () => css(styles.statBody),
   statBodyToggles: (index) => `${css(styles.statBodyToggles)} ${css(styles[`statBodyToggles-${index}`])}`,
   statButton: () => css(styles.statButton),
   statButtonAngle: (active) => css(styles[`statButton-${active}`]),
@@ -261,6 +263,5 @@ export default {
   count: () => css(styles.count),
   countTag: () => css(styles.countTag),
   countTagNumber: () => css(styles.countTagNumber),
-  countTagNumberTest: active => `${css(styles.countTagNumber)} ${css(styles[`countTagNumber-${active}`])}`,
-  xmlInput: () => css(styles.xmlinput)
+  countTagNumberTest: active => `${css(styles.countTagNumber)} ${css(styles[`countTagNumber-${active}`])}`
 }

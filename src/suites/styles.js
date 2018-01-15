@@ -8,13 +8,12 @@ const styles = StyleSheet.create({
   cardHeader: {
     ':hover': {
       cursor: 'pointer',
-      color: '#666',
-      transition: 'background-color 0.2s'
+      color: '#666'
     }
   },
   cardHeaderIcon: {
     transition: 'transform 0.2s',
-    color: '#666'
+    color: '#fff'
   },
   'cardHeaderIcon-collapsed': {
     transform: 'rotate(-180deg)'

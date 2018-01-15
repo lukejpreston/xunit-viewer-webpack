@@ -72,16 +72,14 @@ const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, nam
   </div>
 </div>
 
-const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, xmlActive}) => {
-  return <div>
-    <Head onStatToggle={onStatToggle} type={type} name={name} status={status} />
-    <Count total={total} />
-    {data.map(d => <TestCount key={`stat-count-${name}-${d.type}`} {...d} active={status.active} />)}
-    <div>
-      <Body onSearch={onSearch} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} data={data} />
-    </div>
+const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide, xmlActive}) => <div className={styles.stat(status.active)}>
+  <Head onStatToggle={onStatToggle} type={type} name={name} status={status} />
+  <Count total={total} />
+  {data.map(d => <TestCount key={`stat-count-${name}-${d.type}`} {...d} active={status.active} />)}
+  <div>
+    <Body onSearch={onSearch} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} data={data} />
   </div>
-}
+</div>
 
 Stat.propTypes = {
   status: PropTypes.object.isRequired,
