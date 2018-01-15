@@ -104,7 +104,6 @@ class XunitViewer extends React.Component {
         .catch(err => this.setState({xml, err}))
     })
     codeMirror.setSize(null, 120)
-    window.codeMirror = codeMirror
     codeMirror.getWrapperElement().style.transition = 'height 0.2s'
     parser
       .parse(this.state.xml)
