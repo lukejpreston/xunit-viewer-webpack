@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
   },
 
   statBody: {
+    display: 'inline-block',
     overflow: 'hidden',
     transition: 'height 0.2s'
   },
@@ -187,6 +188,14 @@ const styles = StyleSheet.create({
   },
   'statBody-inactive': {
     height: 0
+  },
+  statBodyToggles: {
+    display: 'inline-block',
+    position: 'relative',
+    top: -41
+  },
+  'statBodyToggles-0': {
+    top: 0
   },
   statButton: {
     'justify-content': 'space-between',
@@ -221,7 +230,11 @@ const styles = StyleSheet.create({
     'margin-bottom': 0
   },
   countTagNumber: {
+    transition: 'min-width 0.1s',
     'min-width': 50
+  },
+  'countTagNumber-active': {
+    'min-width': 221
   },
   xmlinput: {}
 })
@@ -240,6 +253,7 @@ export default {
     return `${css(styles.heroBody)} ${css(styles[`heroBody-${active}-${size}-stats-${activeStats}-xml-${xmlActive}`])}`
   },
   statBody: (active) => `${css(styles.statBody)} ${css(styles[`statBody-${active}`])}`,
+  statBodyToggles: (index) => `${css(styles.statBodyToggles)} ${css(styles[`statBodyToggles-${index}`])}`,
   statButton: () => css(styles.statButton),
   statButtonAngle: (active) => css(styles[`statButton-${active}`]),
   statSearch: () => css(styles.statSearch),
@@ -247,5 +261,6 @@ export default {
   count: () => css(styles.count),
   countTag: () => css(styles.countTag),
   countTagNumber: () => css(styles.countTagNumber),
+  countTagNumberTest: active => `${css(styles.countTagNumber)} ${css(styles[`countTagNumber-${active}`])}`,
   xmlInput: () => css(styles.xmlinput)
 }
