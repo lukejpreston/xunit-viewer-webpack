@@ -47,9 +47,7 @@ let Suite = ({
         collapsed={collapsed}
         key={`test-${test._uuid}`}
         uuid={test._uuid}
-        status={test.status}
-        name={test.name}
-        message={test.message}
+        {...test}
       />
     )}
   </div>

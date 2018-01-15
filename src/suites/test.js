@@ -12,16 +12,16 @@ let knownStatuses = [
   'skip'
 ]
 
-let Test = ({uuid, status, name, message, onToggle, collapsed}) => {
+let Test = ({uuid, status, name, messages, onToggle, collapsed}) => {
   let isCollapsed = Object.keys(collapsed).includes(uuid) ? 'collapsed' : 'expanded'
   status = knownStatuses.includes(status) ? status : 'unknown'
   let Content = null
   let Icon = null
-  if (message) {
-    Content = <div
-      className={`card-content ${styles[isCollapsed]()}`}
+  if (messages) {
+    Content = messages.map(message => <div
+      className={`card-content ${styles.message()} ${styles[isCollapsed]()}`}
       dangerouslySetInnerHTML={{__html: message}}
-    />
+    />)
     Icon = <a className={`card-header-icon ${styles.cardHeaderIcon(isCollapsed)}`}>
       <span className='icon'>
         <FontAwesomeIcon icon={faAngleDown} className={styles.cardHeaderIconIcon()} />
@@ -52,7 +52,7 @@ Test.propTypes = {
   uuid: PropTypes.string.isRequired,
   status: PropTypes.string,
   name: PropTypes.string,
-  message: PropTypes.any,
+  messages: PropTypes.array,
   onToggle: PropTypes.func.isRequired,
   collapsed: PropTypes.object.isRequired
 }

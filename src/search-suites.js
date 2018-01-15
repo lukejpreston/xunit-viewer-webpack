@@ -14,7 +14,7 @@ export default (suites, search) => {
   suites.forEach(suite => {
     if (suite.tests) {
       suite.tests = suite.tests.filter(test => {
-        return matches(search.tests, test.name) | matches(search.tests, test.message)
+        return matches(search.tests, test.name) || test.messages.some(message => matches(search.tests, message))
       })
     }
 

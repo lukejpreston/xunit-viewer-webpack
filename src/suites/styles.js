@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
   },
   expanded: {
     display: 'block'
+  },
+  message: {
+    borderBottom: 'solid 1px rgba(10, 10, 10, 0.1)'
   }
 })
 
@@ -55,5 +58,6 @@ export default {
   properties: () => css(styles.properties),
   propertiesTable: () => css(styles.propertiesTable),
   collapsed: () => css(styles.collapsed),
-  expanded: () => css(styles.expanded)
+  expanded: () => css(styles.expanded),
+  message: () => css(styles.message)
 }

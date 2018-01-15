@@ -6,8 +6,11 @@ window.suites = `<?xml version="1.0" encoding="UTF-8"?>
     <testcase name="It Is A Pass" classname="Passing" time="0.000625">
         Here is a message
     </testcase>
-    <testcase name="It Is A Fail" classname="Failing" time="0.000625" status="fail">
-        Here is a message
+    <testcase name="It Is A Fail" classname="Failing" time="0.000625">
+        <failure message="first message" type=""/>
+        <failure type="">
+          second message
+      	</failure>
     </testcase>
 </testsuite>`
 

@@ -81,33 +81,30 @@ const buildProperties = (suite) => {
   return properties
 }
 
-const extactMessage = (thing) => {
-  if (typeof thing === 'string') return
-  thing.message = ''
-  if (thing['_']) {
-    thing.message = thing['_']
-    delete thing['_']
+const extactMessages = (test) => {
+  if (typeof test === 'string') return
+  test.messages = test.messages || []
+  if (test['_']) {
+    test.messages.push(test['_'])
+    delete test['_']
   }
 }
 
 const extractTestCore = (test, type, status) => {
   if (test[type]) {
     test.status = status
+    test.messages = test.messages || []
 
-    let core = test[type][0]
-    extactMessage(core)
-
-    if (test.message === '') {
-      if (core.message) {
-        test.message = core.message
-      } else if (core['$']) {
-        test.message = ''
-        if (core['$'].message) test.message += core['$'].message
-        if (core['$'].type) test.message += core['$'].type
-      } else if (typeof core === 'string') {
-        test.message = core
+    test[type].forEach(core => {
+      if (typeof core === 'string') {
+        test.messages.push(core)
+      } else if (core._) {
+        test.messages.push(core._)
+      } else if (core.$) {
+        if (core.$.message) test.messages.push(core.$.message)
+        if (core.$.type) test.messages.push(core.$.type)
       }
-    }
+    })
 
     delete test[type]
   }
@@ -121,15 +118,16 @@ const buildTest = (test) => {
 
   test.name = toLaxTitleCase(test.name)
 
-  extactMessage(test)
+  extactMessages(test)
 
   extractTestCore(test, 'passed', 'pass')
   extractTestCore(test, 'passing', 'pass')
   extractTestCore(test, 'pass', 'pass')
+  extractTestCore(test, 'run', 'pass')
 
   extractTestCore(test, 'failure', 'fail')
   extractTestCore(test, 'failed', 'fail')
-  extractTestCore(test, 'failint', 'fail')
+  extractTestCore(test, 'failing', 'fail')
   extractTestCore(test, 'fail', 'fail')
 
   extractTestCore(test, 'errored', 'error')
