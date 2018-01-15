@@ -43,24 +43,14 @@ class XunitViewer extends React.Component {
       title: props.title || 'Xunit Viewer',
       suites: [],
       uuids: {},
-      header: {
-        active: true
-      },
+      header: { active: true },
       search: {
         suites: '',
         tests: '',
         properties: ''
       },
-      collapsed: {
-        suites: {},
-        tests: {},
-        properties: {}
-      },
-      hidden: {
-        suites: {},
-        tests: {},
-        properties: {}
-      }
+      collapsed: {},
+      hidden: {}
     }
   }
   updateWithXml (xml, suites) {
@@ -141,16 +131,15 @@ class XunitViewer extends React.Component {
             Object.keys(this.state.uuids[name]).forEach(key => {
               let uuids = this.state.uuids[name][key]
               uuids.forEach(uuid => {
-                if (collapsed[type][uuid]) delete collapsed[type][uuid]
+                if (collapsed[uuid]) delete collapsed[uuid]
               })
             })
           } else {
             let uuids = this.state.uuids[name][type]
             uuids.forEach(uuid => {
-              if (collapsed[name][uuid]) delete collapsed[name][uuid]
+              if (collapsed[uuid]) delete collapsed[uuid]
             })
           }
-
           let statStatus = this.state.statStatus
           statStatus[type].expanded = statStatus[type].expanded = 'active'
           statStatus[type].collapsed = statStatus[type].collapsed = 'inactive'
@@ -164,13 +153,13 @@ class XunitViewer extends React.Component {
             Object.keys(this.state.uuids[name]).forEach(key => {
               let uuids = this.state.uuids[name][key]
               uuids.forEach(uuid => {
-                collapsed[type][uuid] = true
+                collapsed[uuid] = true
               })
             })
           } else {
             let uuids = this.state.uuids[name][type]
             uuids.forEach(uuid => {
-              collapsed[name][uuid] = true
+              collapsed[uuid] = true
             })
           }
           let statStatus = this.state.statStatus
@@ -187,13 +176,13 @@ class XunitViewer extends React.Component {
             Object.keys(this.state.uuids[name]).forEach(key => {
               let uuids = this.state.uuids[name][key]
               uuids.forEach(uuid => {
-                if (hidden[type][uuid]) delete hidden[type][uuid]
+                if (hidden[uuid]) delete hidden[uuid]
               })
             })
           } else {
             let uuids = this.state.uuids[name][type]
             uuids.forEach(uuid => {
-              if (hidden[name][uuid]) delete hidden[name][uuid]
+              if (hidden[uuid]) delete hidden[uuid]
             })
           }
 
@@ -210,13 +199,13 @@ class XunitViewer extends React.Component {
             Object.keys(this.state.uuids[name]).forEach(key => {
               let uuids = this.state.uuids[name][key]
               uuids.forEach(uuid => {
-                hidden[type][uuid] = true
+                hidden[uuid] = true
               })
             })
           } else {
             let uuids = this.state.uuids[name][type]
             uuids.forEach(uuid => {
-              hidden[name][uuid] = true
+              hidden[uuid] = true
             })
           }
 
@@ -240,10 +229,10 @@ class XunitViewer extends React.Component {
           search={this.state.search}
           hidden={this.state.hidden}
           collapsed={this.state.collapsed}
-          onToggle={({type, uuid}) => {
+          onToggle={({uuid}) => {
             let collapsed = this.state.collapsed
-            if (collapsed[type][uuid]) delete collapsed[type][uuid]
-            else collapsed[type][uuid] = true
+            if (collapsed[uuid]) delete collapsed[uuid]
+            else collapsed[uuid] = true
             this.setState({collapsed})
           }}
         />

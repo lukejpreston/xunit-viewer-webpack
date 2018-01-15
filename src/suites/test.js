@@ -13,7 +13,7 @@ let knownStatuses = [
 ]
 
 let Test = ({uuid, status, name, message, onToggle, collapsed}) => {
-  let isCollapsed = Object.keys(collapsed.tests).includes(uuid) ? 'collapsed' : 'expanded'
+  let isCollapsed = Object.keys(collapsed).includes(uuid) ? 'collapsed' : 'expanded'
   status = knownStatuses.includes(status) ? status : 'unknown'
   let Content = null
   let Icon = null

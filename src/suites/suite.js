@@ -36,7 +36,7 @@ let Suite = ({
   let Props = null
   if (Object.keys(properties).length > 1) Props = <Properties onToggle={onToggle} collapsed={collapsed} data={properties} />
 
-  let isCollapsed = Object.keys(collapsed.suites).includes(uuid) ? 'collapsed' : 'expanded'
+  let isCollapsed = Object.keys(collapsed).includes(uuid) ? 'collapsed' : 'expanded'
 
   let Content = <div className={`card-content ${styles[isCollapsed]()}`}>
     {Props}

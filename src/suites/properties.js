@@ -19,7 +19,7 @@ Row.propTypes = {
 }
 
 let Properties = ({data = {}, onToggle, collapsed}) => {
-  let isCollapsed = Object.keys(collapsed.properties).includes(data._uuid) ? 'collapsed' : 'expanded'
+  let isCollapsed = Object.keys(collapsed).includes(data._uuid) ? 'collapsed' : 'expanded'
   return <div className={`card ${styles.properties()}`}>
     <header
       className={`card-header ${styles.cardHeader()} ${statusStyles.skip()}`}

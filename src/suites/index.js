@@ -7,15 +7,15 @@ import clone from 'clone'
 let hideSuites = (suites, hidden) => {
   suites = clone(suites)
   suites = suites.filter(suite => {
-    return hidden.suites[suite._uuid] !== true
+    return hidden[suite._uuid] !== true
   })
 
   suites.forEach(suite => {
-    if (suite.properties && hidden.properties[suite.properties._uuid]) delete suite.properties
+    if (suite.properties && hidden[suite.properties._uuid]) delete suite.properties
 
     if (suite.tests) {
       suite.tests = suite.tests.filter(test => {
-        return hidden.tests[test._uuid] !== true
+        return hidden[test._uuid] !== true
       })
     }
   })
