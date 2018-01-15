@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     transition: 'height 0.2s'
   },
   'heroBody-active-0-stats-0-xml-active': {
-    height: 160
+    height: 170
   },
   'heroBody-active-1-stats-0-xml-active': {
     height: 41 * 1 + 0 * 130 + 5 + 165

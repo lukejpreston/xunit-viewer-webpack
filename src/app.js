@@ -6,7 +6,9 @@ window.suites = `<?xml version="1.0" encoding="UTF-8"?>
     <testcase name="It Is A Pass" classname="Passing" time="0.000625">
         Here is a message
     </testcase>
-    <testcase name="It Is A Fail" classname="Failing" time="0.000625" status="fail"></testcase>
+    <testcase name="It Is A Fail" classname="Failing" time="0.000625" status="fail">
+        Here is a message
+    </testcase>
 </testsuite>`
 
 const App = () => <XunitViewer xml={window.suites} title={window.title} />

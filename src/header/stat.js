@@ -31,7 +31,7 @@ const TestCount = ({type, total, active}) => <div className={`tags has-addons ${
 const Body = ({onSearch, onExpand, onCollapse, onShow, onHide, status, type, name, data}) => <div className={styles.statBody(status.active)}>
   <Search onSearch={onSearch} type={type} />
   <Toggles index={0} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} />
-  {data.map((d, index) => <Toggles index={index + 1} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} />)}
+  {data.map((d, index) => <Toggles index={index + 1} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} testType={d.type} />)}
 </div>
 
 const Search = ({onSearch, type}) => <div className={`control has-icons-right ${styles.statSearch()}`}>
@@ -41,15 +41,15 @@ const Search = ({onSearch, type}) => <div className={`control has-icons-right ${
   </span>
 </div>
 
-const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, name}) => <div className={styles.statBodyToggles(index)}>
+const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, name, testType}) => <div className={styles.statBodyToggles(index)}>
   <div>
-    <button className={`button ${status.expanded === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onExpand({name, type}) }}>
+    <button className={`button ${status.expanded === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onExpand({name, type, testType}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.expanded === 'active' ? faDotCircle : faCircle} />
       </span>
       <span>Expanded</span>
     </button>
-    <button className={`button ${status.collapsed === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onCollapse({name, type}) }}>
+    <button className={`button ${status.collapsed === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onCollapse({name, type, testType}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.collapsed === 'active' ? faDotCircle : faCircle} />
       </span>
@@ -57,13 +57,13 @@ const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, nam
     </button>
   </div>
   <div>
-    <button className={`button ${status.shown === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onShow({name, type}) }}>
+    <button className={`button ${status.shown === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onShow({name, type, testType}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.shown === 'active' ? faDotCircle : faCircle} />
       </span>
       <span>Shown</span>
     </button>
-    <button className={`button ${status.hidden === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onHide({name, type}) }}>
+    <button className={`button ${status.hidden === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onHide({name, type, testType}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.hidden === 'active' ? faDotCircle : faCircle} />
       </span>
