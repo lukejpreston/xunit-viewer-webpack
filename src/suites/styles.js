@@ -40,10 +40,14 @@ const styles = StyleSheet.create({
     display: 'none'
   },
   expanded: {
-    display: 'block'
+
   },
   message: {
-    borderBottom: 'solid 1px rgba(10, 10, 10, 0.1)'
+    borderTop: 'solid 1px rgba(10, 10, 10, 0.1)'
+  },
+  toggle: {
+    margin: 5,
+    marginRight: 0
   }
 })
 
@@ -59,5 +63,6 @@ export default {
   propertiesTable: () => css(styles.propertiesTable),
   collapsed: () => css(styles.collapsed),
   expanded: () => css(styles.expanded),
-  message: () => css(styles.message)
+  message: () => css(styles.message),
+  toggle: () => css(styles.toggle)
 }
