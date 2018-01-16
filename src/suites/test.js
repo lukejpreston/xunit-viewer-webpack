@@ -18,7 +18,7 @@ let Test = ({uuid, status, name, messages, onToggle, collapsed, onToggleMessage,
   status = knownStatuses.includes(status) ? status : 'unknown'
   let Content = null
   let Icon = null
-  Content = messages.map((message, index) => !pretty ? <div
+  Content = messages.map((message, index) => pretty ? <div
     key={`test-message-${uuid}-${index}`}
     className={`card-content ${styles.message()} ${styles[isCollapsed]()}`}
     dangerouslySetInnerHTML={{__html: message}}
@@ -49,15 +49,15 @@ let Test = ({uuid, status, name, messages, onToggle, collapsed, onToggleMessage,
       {Icon}
     </header>
     <div>
-      <button className={`button is-${pretty ? 'link' : ''} ${styles.toggle()} ${styles[isCollapsed]()}`} onClick={() => onToggleMessage({ message: 'raw', uuid })}>
+      <button className={`button is-${!pretty ? 'link' : ''} ${styles.toggle()} ${styles[isCollapsed]()}`} onClick={() => onToggleMessage({ message: 'raw', uuid })}>
         <span className='icon'>
-          <FontAwesomeIcon icon={pretty ? faDotCircle : faCircle} />
+          <FontAwesomeIcon icon={!pretty ? faDotCircle : faCircle} />
         </span>
         <span>Raw</span>
       </button>
-      <button className={`button is-${!pretty ? 'link' : ''} ${styles.toggle()} ${styles[isCollapsed]()}`} onClick={() => onToggleMessage({ message: 'pretty', uuid })}>
+      <button className={`button is-${pretty ? 'link' : ''} ${styles.toggle()} ${styles[isCollapsed]()}`} onClick={() => onToggleMessage({ message: 'pretty', uuid })}>
         <span className='icon'>
-          <FontAwesomeIcon icon={!pretty ? faDotCircle : faCircle} />
+          <FontAwesomeIcon icon={pretty ? faDotCircle : faCircle} />
         </span>
         <span>Pretty</span>
       </button>

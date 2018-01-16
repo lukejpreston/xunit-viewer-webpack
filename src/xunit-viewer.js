@@ -50,7 +50,8 @@ class XunitViewer extends React.Component {
         properties: ''
       },
       collapsed: {},
-      hidden: {}
+      hidden: {},
+      pretty: {}
     }
   }
   updateWithXml (xml, suites) {
@@ -59,6 +60,7 @@ class XunitViewer extends React.Component {
       properties: {},
       tests: {}
     }
+    const pretty = {}
     suites.forEach(suite => {
       let suiteStatus = knownStatuses.includes(suite.status) ? suite.status : 'unknown'
       uuids.suites[suiteStatus] = uuids.suites[suiteStatus] || []
@@ -74,10 +76,11 @@ class XunitViewer extends React.Component {
           let testStatus = knownStatuses.includes(test.status) ? test.status : 'unknown'
           uuids.tests[testStatus] = uuids.tests[testStatus] || []
           uuids.tests[testStatus].push(test._uuid)
+          pretty[test._uuid] = true
         })
       }
     })
-    this.setState({xml, uuids, suites, err: null})
+    this.setState({xml, uuids, suites, err: null, pretty})
   }
   componentDidMount () {
     const codeMirror = CodeMirror.fromTextArea(document.getElementById('xml'), {
@@ -229,11 +232,18 @@ class XunitViewer extends React.Component {
           search={this.state.search}
           hidden={this.state.hidden}
           collapsed={this.state.collapsed}
+          pretty={this.state.pretty}
           onToggle={({uuid}) => {
             let collapsed = this.state.collapsed
             if (collapsed[uuid]) delete collapsed[uuid]
             else collapsed[uuid] = true
             this.setState({collapsed})
+          }}
+          onToggleMessage={({uuid, message}) => {
+            this.state.pretty[uuid] = !this.state.pretty[uuid]
+            this.setState({
+              pretty: this.state.pretty
+            })
           }}
         />
       }

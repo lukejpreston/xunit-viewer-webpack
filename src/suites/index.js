@@ -22,7 +22,7 @@ let hideSuites = (suites, hidden) => {
   return suites
 }
 
-let Suites = ({suites = [], search, collapsed, hidden, onToggle}) => {
+let Suites = ({suites = [], search, collapsed, hidden, onToggle, onToggleMessage, pretty}) => {
   suites = searchSuites(suites, search)
   suites = hideSuites(suites, hidden)
   return <section className={`section ${styles.suites()}`}>
@@ -32,6 +32,8 @@ let Suites = ({suites = [], search, collapsed, hidden, onToggle}) => {
         hidden={hidden}
         uuid={suite._uuid}
         onToggle={onToggle}
+        onToggleMessage={onToggleMessage}
+        pretty={pretty}
         key={`suite-${suite._uuid}`}
         name={suite.name}
         status={suite.status}
@@ -49,7 +51,8 @@ Suites.propTypes = {
   search: PropTypes.object.isRequired,
   collapsed: PropTypes.object.isRequired,
   hidden: PropTypes.object.isRequired,
-  onToggle: PropTypes.func.isRequired
+  onToggle: PropTypes.func.isRequired,
+  onToggleMessage: PropTypes.func.isRequired
 }
 
 export default Suites

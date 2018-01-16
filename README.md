@@ -4,3 +4,4 @@
     Suites: 100, Passing: 90, Failed 10
 * xunit 2
 * show xml modal
+* seach should be on it's own and the toggles for count moved right one

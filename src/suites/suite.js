@@ -14,9 +14,11 @@ let Suite = ({
   properties = {},
   tests = [],
   onToggle,
+  onToggleMessage,
   collapsed,
   hidden,
-  suites = []
+  suites = [],
+  pretty
 }) => {
   suites = suites.map(suite => {
     return <Suite
@@ -41,15 +43,15 @@ let Suite = ({
   let Content = <div className={`card-content ${styles[isCollapsed]()}`}>
     {Props}
     {suites}
-    {tests.map(test =>
-      <Test
-        onToggle={onToggle}
-        collapsed={collapsed}
-        key={`test-${test._uuid}`}
-        uuid={test._uuid}
-        {...test}
-      />
-    )}
+    {tests.map(test => <Test
+      onToggle={onToggle}
+      onToggleMessage={onToggleMessage}
+      collapsed={collapsed}
+      pretty={pretty[test._uuid]}
+      key={`test-${test._uuid}`}
+      uuid={test._uuid}
+      {...test}
+    />)}
   </div>
 
   let Icon = <a className={`card-header-icon ${styles.cardHeaderIcon(isCollapsed)}`}>
@@ -89,7 +91,8 @@ Suite.propTypes = {
   onToggle: PropTypes.func.isRequired,
   collapsed: PropTypes.object.isRequired,
   hidden: PropTypes.object.isRequired,
-  suites: PropTypes.array
+  suites: PropTypes.array,
+  onToggleMessage: PropTypes.func.isRequired
 }
 
 export default Suite
