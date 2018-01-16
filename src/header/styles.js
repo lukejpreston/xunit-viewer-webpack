@@ -102,80 +102,79 @@ const styles = StyleSheet.create({
     height: 170
   },
   'heroBody-active-1-stats-0-xml-active': {
-    height: 41 * 1 + 0 * 130 + 5 + 165
+    height: 41 * 1 + 0 * 90 + 5 + 165
   },
   'heroBody-active-1-stats-1-xml-active': {
-    height: 41 * 1 + 1 * 130 + 5 + 165
+    height: 41 * 1 + 1 * 90 + 5 + 165
   },
   'heroBody-active-1-stats-2-xml-active': {
-    height: 41 * 1 + 2 * 130 + 5 + 165
+    height: 41 * 1 + 2 * 90 + 5 + 165
   },
   'heroBody-active-1-stats-3-xml-active': {
-    height: 41 * 2 + 3 * 130 + 5 + 165
+    height: 41 * 2 + 3 * 90 + 5 + 165
   },
   'heroBody-active-2-stats-0-xml-active': {
-    height: 41 * 2 + 0 * 130 + 5 + 165
+    height: 41 * 2 + 0 * 90 + 5 + 165
   },
   'heroBody-active-2-stats-1-xml-active': {
-    height: 41 * 2 + 1 * 130 + 5 + 165
+    height: 41 * 2 + 1 * 90 + 5 + 165
   },
   'heroBody-active-2-stats-2-xml-active': {
-    height: 41 * 2 + 2 * 130 + 5 + 165
+    height: 41 * 2 + 2 * 90 + 5 + 165
   },
   'heroBody-active-2-stats-3-xml-active': {
-    height: 41 * 2 + 3 * 130 + 5 + 165
+    height: 41 * 2 + 3 * 90 + 5 + 165
   },
   'heroBody-active-3-stats-0-xml-active': {
     height: 41 * 3 + 165
   },
   'heroBody-active-3-stats-1-xml-active': {
-    height: 41 * 3 + 130 + 5 + 165
+    height: 41 * 3 + 90 + 5 + 165
   },
   'heroBody-active-3-stats-2-xml-active': {
-    height: 41 * 3 + 2 * 130 + 10 + 165
+    height: 41 * 3 + 2 * 90 + 10 + 165
   },
   'heroBody-active-3-stats-3-xml-active': {
-    height: 41 * 3 + 3 * 130 + 5 + 165
+    height: 41 * 3 + 3 * 90 + 5 + 165
   },
-
   'heroBody-active-0-stats-0-xml-inactive': {
     height: 40
   },
   'heroBody-active-1-stats-0-xml-inactive': {
-    height: 41 * 1 + 0 * 130 + 5 + 45
+    height: 41 * 1 + 0 * 90 + 5 + 45
   },
   'heroBody-active-1-stats-1-xml-inactive': {
-    height: 41 * 1 + 1 * 130 + 5 + 45
+    height: 41 * 1 + 1 * 90 + 5 + 45
   },
   'heroBody-active-1-stats-2-xml-inactive': {
-    height: 41 * 1 + 2 * 130 + 5 + 45
+    height: 41 * 1 + 2 * 90 + 5 + 45
   },
   'heroBody-active-1-stats-3-xml-inactive': {
-    height: 41 * 2 + 3 * 130 + 5 + 45
+    height: 41 * 2 + 3 * 90 + 5 + 45
   },
   'heroBody-active-2-stats-0-xml-inactive': {
-    height: 41 * 2 + 0 * 130 + 5 + 45
+    height: 41 * 2 + 0 * 90 + 5 + 45
   },
   'heroBody-active-2-stats-1-xml-inactive': {
-    height: 41 * 2 + 1 * 130 + 5 + 45
+    height: 41 * 2 + 1 * 90 + 5 + 45
   },
   'heroBody-active-2-stats-2-xml-inactive': {
-    height: 41 * 2 + 2 * 130 + 5 + 45
+    height: 41 * 2 + 2 * 90 + 5 + 45
   },
   'heroBody-active-2-stats-3-xml-inactive': {
-    height: 41 * 2 + 3 * 130 + 5 + 45
+    height: 41 * 2 + 3 * 90 + 5 + 45
   },
   'heroBody-active-3-stats-0-xml-inactive': {
     height: 41 * 3 + 45
   },
   'heroBody-active-3-stats-1-xml-inactive': {
-    height: 41 * 3 + 130 + 5 + 45
+    height: 41 * 3 + 90 + 5 + 45
   },
   'heroBody-active-3-stats-2-xml-inactive': {
-    height: 41 * 3 + 2 * 130 + 10 + 45
+    height: 41 * 3 + 2 * 90 + 10 + 45
   },
   'heroBody-active-3-stats-3-xml-inactive': {
-    height: 41 * 3 + 3 * 130 + 5 + 45
+    height: 41 * 3 + 3 * 90 + 5 + 45
   },
 
   stat: {
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
     transition: 'height 0.2s'
   },
   'stat-active': {
-    height: 168
+    height: 128
   },
   'stat-inactive': {
     height: 40
@@ -193,16 +192,12 @@ const styles = StyleSheet.create({
   },
   statBodyToggles: {
     display: 'inline-block',
-    position: 'relative',
-    top: -41
-  },
-  'statBodyToggles-0': {
-    top: 0
+    verticalAlign: 'top'
   },
   statButton: {
-    'justify-content': 'space-between',
+    justifyContent: 'space-between',
     width: 166,
-    'margin-bottom': 5
+    marginBottom: 5
   },
   'statButton-active': {
     transition: 'transform 0.2s',
@@ -213,23 +208,26 @@ const styles = StyleSheet.create({
     transform: 'rotate(-180deg)'
   },
   statSearch: {
-    width: 250,
-    'margin-bottom': 5
+    verticalAlign: 'top',
+    display: 'inline-block',
+    width: 166,
+    marginBottom: 5,
+    marginRight: 5
   },
   statRadio: {
-    'justify-content': 'left',
+    justifyContent: 'left',
     width: 122,
-    'margin-right': 5,
-    'margin-bottom': 5
+    marginRight: 5,
+    marginBottom: 5
   },
   count: {
     display: 'inline-flex',
-    'margin-left': 5,
-    'margin-bottom': 0
+    marginLeft: 5,
+    marginBottom: 0
   },
   countTag: {
     height: 36,
-    'margin-bottom': 0
+    marginBottom: 0
   },
   countTagNumber: {
     transition: 'min-width 0.1s',

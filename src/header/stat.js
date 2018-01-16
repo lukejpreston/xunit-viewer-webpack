@@ -21,16 +21,17 @@ Head.propTypes = {
   onStatToggle: PropTypes.func.isRequired
 }
 
-const Count = ({total}) => <div className={`tags has-addons ${styles.count()}`}>
+const Count = ({total, active}) => <div className={`tags has-addons ${styles.count()}`}>
   <span className={`tag is-medium is-info ${styles.countTag()}`}>
     <span className='icon is-small is-right'>
       <FontAwesomeIcon icon={faHashtag} />
     </span>
   </span>
-  <span className={`tag is-medium is-white ${styles.countTag()} ${styles.countTagNumber()}`}>{total}</span>
+  <span className={`tag is-medium is-white ${styles.countTag()} ${styles.countTagNumberTest(active)}`}>{total}</span>
 </div>
 
 Count.propTypes = {
+  active: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired
 }
 
@@ -120,7 +121,7 @@ Toggles.propTypes = {
 
 const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide}) => <div className={styles.stat(status.active)}>
   <Head onStatToggle={onStatToggle} type={type} name={name} status={status} />
-  <Count total={total} />
+  <Count total={total} active={status.active} />
   {data.map(d => <TestCount key={`stat-count-${name}-${d.type}`} {...d} active={status.active} />)}
   <div>
     <Body onSearch={onSearch} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} data={data} />
