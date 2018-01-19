@@ -12,58 +12,76 @@ const colors = {
 
 const styles = StyleSheet.create({
   default: {
-    'background-color': colors.default,
+    backgroundColor: colors.default,
+    borderColor: colors.default,
     ':hover': {
-      'background-color': color(colors.default).darken(0.15).toString()
+      backgroundColor: color(colors.default).darken(0.15).toString(),
+      borderColor: color(colors.default).darken(0.15).toString()
     }
   },
   fail: {
-    'background-color': colors.fail,
+    backgroundColor: colors.fail,
+    borderColor: colors.fail,
     ':hover': {
-      'background-color': color(colors.fail).darken(0.15).toString()
+      backgroundColor: color(colors.fail).darken(0.15).toString(),
+      borderColor: color(colors.fail).darken(0.15).toString()
     }
   },
   pass: {
-    'background-color': colors.pass,
+    backgroundColor: colors.pass,
+    borderColor: colors.pass,
     ':hover': {
-      'background-color': color(colors.pass).darken(0.15).toString()
+      backgroundColor: color(colors.pass).darken(0.15).toString(),
+      borderColor: color(colors.pass).darken(0.15).toString()
     }
   },
   error: {
-    'background-color': colors.error,
+    backgroundColor: colors.error,
+    borderColor: colors.error,
     ':hover': {
-      'background-color': color(colors.error).darken(0.15).toString()
+      backgroundColor: color(colors.error).darken(0.15).toString(),
+      borderColor: color(colors.error).darken(0.15).toString()
     }
   },
   skip: {
-    'background-color': colors.skip,
+    backgroundColor: colors.skip,
+    borderColor: colors.skip,
     ':hover': {
-      'background-color': color(colors.skip).darken(0.15).toString()
+      backgroundColor: color(colors.skip).darken(0.15).toString(),
+      borderColor: color(colors.skip).darken(0.15).toString()
     }
   },
   unknown: {
-    'background-color': colors.unknown,
+    backgroundColor: colors.unknown,
+    borderColor: colors.unknown,
     ':hover': {
-      'background-color': color(colors.unknown).darken(0.15).toString()
+      backgroundColor: color(colors.unknown).darken(0.15).toString(),
+      borderColor: color(colors.unknown).darken(0.15).toString()
     }
   },
   defaultStatic: {
-    'background-color': colors.default
+    backgroundColor: colors.default,
+    borderColor: colors.defaul
   },
   failStatic: {
-    'background-color': colors.fail
+    backgroundColor: colors.fail,
+    borderColor: colors.fail
   },
   passStatic: {
-    'background-color': colors.pass
+    backgroundColor: colors.pass,
+    borderColor: colors.pass
   },
   errorStatic: {
-    'background-color': colors.error
+    backgroundColor: colors.error,
+    borderColor: colors.error
   },
   skipStatic: {
-    'background-color': colors.skip
+    backgroundColor: colors.skip,
+    borderColor: colors.skip
   },
   unknownStatic: {
-    'background-color': colors.unknown
+    backgroundColor: colors.unknown,
+    borderColor: colors.unknown
   }
 })
 

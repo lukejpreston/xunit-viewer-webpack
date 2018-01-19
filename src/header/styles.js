@@ -216,7 +216,6 @@ const styles = StyleSheet.create({
   },
   statRadio: {
     justifyContent: 'left',
-    width: 122,
     marginRight: 5,
     marginBottom: 5
   },
@@ -230,11 +229,7 @@ const styles = StyleSheet.create({
     marginBottom: 0
   },
   countTagNumber: {
-    transition: 'min-width 0.1s',
-    'min-width': 50
-  },
-  'countTagNumber-active': {
-    'min-width': 221
+    'min-width': 49
   }
 })
 

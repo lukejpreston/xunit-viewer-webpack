@@ -4,8 +4,7 @@ import styles from './styles'
 import statusStyles from '../status-styles'
 import iconMap from '../icon-map'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faSearch, faAngleDown, faHashtag } from '@fortawesome/fontawesome-free-solid'
-import { faDotCircle, faCircle } from '@fortawesome/fontawesome-free-regular'
+import { faSearch, faAngleDown, faHashtag, faPlus, faMinus, faEye, faEyeSlash } from '@fortawesome/fontawesome-free-solid'
 
 const Head = ({onStatToggle, type, name, status}) => <button className={`button is-link ${styles.statButton()}`} onClick={() => onStatToggle(type)}>
   <span>{name}</span>
@@ -46,7 +45,7 @@ TestCount.propTypes = {
   type: PropTypes.string.isRequired
 }
 
-const Body = ({onSearch, onExpand, onCollapse, onShow, onHide, status, type, name, data}) => <div className={styles.statBody(status.active)}>
+const Body = ({onSearch, onExpand, onCollapse, onShow, onHide, status, type, name, data}) => <div className={styles.statBody(status[type].active)}>
   <Search onSearch={onSearch} type={type} />
   <Toggles index={0} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} />
   {data.map((d, index) => <Toggles key={`toggle-${type}-${name}-${d.type}`} index={index + 1} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} testType={d.type} />)}
@@ -78,31 +77,27 @@ Search.propTypes = {
 
 const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, name, testType}) => <div className={styles.statBodyToggles(index)}>
   <div>
-    <button className={`button ${status.expanded === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onExpand({name, type: testType || type}) }}>
+    <button className={`button ${status[testType || type].expanded === 'active' ? (testType ? statusStyles[testType]() : 'is-link') : 'is-light'} ${styles.statRadio(status[testType || type].expanded)}`} onClick={() => { onExpand({name, type: testType || type}) }}>
       <span className='icon'>
-        <FontAwesomeIcon icon={status.expanded === 'active' ? faDotCircle : faCircle} />
+        <FontAwesomeIcon icon={faPlus} />
       </span>
-      <span>Expanded</span>
     </button>
-    <button className={`button ${status.collapsed === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onCollapse({name, type: testType || type}) }}>
+    <button className={`button ${status[testType || type].collapsed === 'active' ? (testType ? statusStyles[testType]() : 'is-link') : 'is-light'} ${styles.statRadio(status[testType || type].expanded)}`} onClick={() => { onCollapse({name, type: testType || type}) }}>
       <span className='icon'>
-        <FontAwesomeIcon icon={status.collapsed === 'active' ? faDotCircle : faCircle} />
+        <FontAwesomeIcon icon={faMinus} />
       </span>
-      <span>Collapsed</span>
     </button>
   </div>
   <div>
-    <button className={`button ${status.shown === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onShow({name, type: testType || type}) }}>
+    <button className={`button ${status[testType || type].shown === 'active' ? (testType ? statusStyles[testType]() : 'is-link') : 'is-light'} ${styles.statRadio(status[testType || type].expanded)}`} onClick={() => { onShow({name, type: testType || type}) }}>
       <span className='icon'>
-        <FontAwesomeIcon icon={status.shown === 'active' ? faDotCircle : faCircle} />
+        <FontAwesomeIcon icon={faEye} />
       </span>
-      <span>Shown</span>
     </button>
-    <button className={`button ${status.hidden === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onHide({name, type: testType || type}) }}>
+    <button className={`button ${status[testType || type].hidden === 'active' ? (testType ? statusStyles[testType]() : 'is-link') : 'is-light'} ${styles.statRadio(status[testType || type].expanded)}`} onClick={() => { onHide({name, type: testType || type}) }}>
       <span className='icon'>
-        <FontAwesomeIcon icon={status.hidden === 'active' ? faDotCircle : faCircle} />
+        <FontAwesomeIcon icon={faEyeSlash} />
       </span>
-      <span>Hidden</span>
     </button>
   </div>
 </div>
@@ -119,10 +114,10 @@ Toggles.propTypes = {
   index: PropTypes.number
 }
 
-const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide}) => <div className={styles.stat(status.active)}>
+const Stat = ({status, name, total, data = [], type, onStatToggle, onSearch, onExpand, onCollapse, onShow, onHide}) => <div className={styles.stat(status[type].active)}>
   <Head onStatToggle={onStatToggle} type={type} name={name} status={status} />
-  <Count total={total} active={status.active} />
-  {data.map(d => <TestCount key={`stat-count-${name}-${d.type}`} {...d} active={status.active} />)}
+  <Count total={total} active={status[type].active} />
+  {data.map(d => <TestCount key={`stat-count-${name}-${d.type}`} {...d} active={status[d.type].active} />)}
   <div>
     <Body onSearch={onSearch} onExpand={onExpand} onCollapse={onCollapse} onShow={onShow} onHide={onHide} status={status} type={type} name={name} data={data} />
   </div>

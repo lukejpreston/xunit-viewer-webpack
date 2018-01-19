@@ -23,25 +23,101 @@ class XunitViewer extends React.Component {
       xmlActive: 'active',
       statStatus: {
         suites: {
-          active: 'inactive',
-          expanded: 'active',
-          collapsed: 'inactive',
-          shown: 'active',
-          hidden: 'inactive'
+          suites: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          fail: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          pass: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          skip: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          unknown: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          error: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          }
         },
         tests: {
-          active: 'inactive',
-          expanded: 'active',
-          collapsed: 'inactive',
-          shown: 'active',
-          hidden: 'inactive'
+          tests: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          fail: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          pass: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          skip: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          unknown: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          },
+          error: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          }
         },
         properties: {
-          active: 'inactive',
-          expanded: 'active',
-          collapsed: 'inactive',
-          shown: 'active',
-          hidden: 'inactive'
+          properties: {
+            active: 'inactive',
+            expanded: 'active',
+            collapsed: 'inactive',
+            shown: 'active',
+            hidden: 'inactive'
+          }
         }
       },
       title: props.title || 'Xunit Viewer',
@@ -136,7 +212,10 @@ class XunitViewer extends React.Component {
         }}
         onStatToggle={(type) => {
           let statStatus = this.state.statStatus
-          statStatus[type].active = statStatus[type].active === 'active' ? 'inactive' : 'active'
+          Object.keys(statStatus[type]).forEach(t => {
+            statStatus[type][t].active = statStatus[type][t].active === 'active' ? 'inactive' : 'active'
+          })
+
           this.setState({statStatus})
         }}
         onExpand={({name, type}) => {
@@ -158,8 +237,14 @@ class XunitViewer extends React.Component {
             })
           }
           let statStatus = this.state.statStatus
-          statStatus[type].expanded = statStatus[type].expanded = 'active'
-          statStatus[type].collapsed = statStatus[type].collapsed = 'inactive'
+          statStatus[name][type].expanded = statStatus[name][type].expanded = 'active'
+          statStatus[name][type].collapsed = statStatus[name][type].collapsed = 'inactive'
+          if (name === type) {
+            Object.keys(statStatus[name]).forEach(t => {
+              statStatus[name][t].expanded = statStatus[name][t].expanded = 'active'
+              statStatus[name][t].collapsed = statStatus[name][t].collapsed = 'inactive'
+            })
+          }
           this.setState({statStatus, collapsed})
         }}
         onCollapse={({name, type}) => {
@@ -180,8 +265,15 @@ class XunitViewer extends React.Component {
             })
           }
           let statStatus = this.state.statStatus
-          statStatus[type].expanded = statStatus[type].expanded = 'inactive'
-          statStatus[type].collapsed = statStatus[type].collapsed = 'active'
+          statStatus[name][type].expanded = statStatus[name][type].expanded = 'inactive'
+          statStatus[name][type].collapsed = statStatus[name][type].collapsed = 'active'
+
+          if (name === type) {
+            Object.keys(statStatus[name]).forEach(t => {
+              statStatus[name][t].expanded = statStatus[name][t].expanded = 'inactive'
+              statStatus[name][t].collapsed = statStatus[name][t].collapsed = 'active'
+            })
+          }
           this.setState({statStatus, collapsed})
         }}
         onShow={({name, type}) => {
@@ -204,8 +296,14 @@ class XunitViewer extends React.Component {
           }
 
           let statStatus = this.state.statStatus
-          statStatus[type].hidden = statStatus[type].hidden = 'inactive'
-          statStatus[type].shown = statStatus[type].shown = 'active'
+          statStatus[name][type].hidden = statStatus[name][type].hidden = 'inactive'
+          statStatus[name][type].shown = statStatus[name][type].shown = 'active'
+          if (name === type) {
+            Object.keys(statStatus[name]).forEach(t => {
+              statStatus[name][t].hidden = statStatus[name][t].hidden = 'inactive'
+              statStatus[name][t].shown = statStatus[name][t].shown = 'active'
+            })
+          }
           this.setState({statStatus, hidden})
         }}
         onHide={({name, type}) => {
@@ -227,8 +325,14 @@ class XunitViewer extends React.Component {
           }
 
           let statStatus = this.state.statStatus
-          statStatus[type].hidden = statStatus[type].hidden = 'active'
-          statStatus[type].shown = statStatus[type].shown = 'inactive'
+          statStatus[name][type].hidden = statStatus[name][type].hidden = 'active'
+          statStatus[name][type].shown = statStatus[name][type].shown = 'inactive'
+          if (name === type) {
+            Object.keys(statStatus[name]).forEach(t => {
+              statStatus[name][t].hidden = statStatus[name][t].hidden = 'active'
+              statStatus[name][t].shown = statStatus[name][t].shown = 'inactive'
+            })
+          }
           this.setState({statStatus, hidden})
         }}
         isActive={this.state.header.active}
