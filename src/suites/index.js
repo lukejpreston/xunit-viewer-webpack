@@ -52,7 +52,8 @@ Suites.propTypes = {
   collapsed: PropTypes.object.isRequired,
   hidden: PropTypes.object.isRequired,
   onToggle: PropTypes.func.isRequired,
-  onToggleMessage: PropTypes.func.isRequired
+  onToggleMessage: PropTypes.func.isRequired,
+  pretty: PropTypes.object
 }
 
 export default Suites

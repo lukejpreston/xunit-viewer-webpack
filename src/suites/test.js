@@ -48,7 +48,7 @@ let Test = ({uuid, status, name, messages, onToggle, collapsed, onToggleMessage,
       </p>
       {Icon}
     </header>
-    <div>
+    {messages.length === 0 ? null : <div>
       <button className={`button is-${!pretty ? 'link' : ''} ${styles.toggle()} ${styles[isCollapsed]()}`} onClick={() => onToggleMessage({ message: 'raw', uuid })}>
         <span className='icon'>
           <FontAwesomeIcon icon={!pretty ? faDotCircle : faCircle} />
@@ -62,6 +62,7 @@ let Test = ({uuid, status, name, messages, onToggle, collapsed, onToggleMessage,
         <span>Pretty</span>
       </button>
     </div>
+    }
     {Content}
   </div>
 }
@@ -73,7 +74,7 @@ Test.propTypes = {
   messages: PropTypes.array,
   onToggle: PropTypes.func.isRequired,
   collapsed: PropTypes.object.isRequired,
-  onToggleMessage: PropTypes.func.isRequired,
+  onToggleMessage: PropTypes.func,
   pretty: PropTypes.bool
 }
 

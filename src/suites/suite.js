@@ -18,7 +18,7 @@ let Suite = ({
   collapsed,
   hidden,
   suites = [],
-  pretty
+  pretty = {}
 }) => {
   suites = suites.map(suite => {
     return <Suite
@@ -92,7 +92,8 @@ Suite.propTypes = {
   collapsed: PropTypes.object.isRequired,
   hidden: PropTypes.object.isRequired,
   suites: PropTypes.array,
-  onToggleMessage: PropTypes.func.isRequired
+  onToggleMessage: PropTypes.func,
+  pretty: PropTypes.object
 }
 
 export default Suite

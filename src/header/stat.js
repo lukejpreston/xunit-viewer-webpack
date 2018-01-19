@@ -78,13 +78,13 @@ Search.propTypes = {
 
 const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, name, testType}) => <div className={styles.statBodyToggles(index)}>
   <div>
-    <button className={`button ${status.expanded === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onExpand({name, type, testType}) }}>
+    <button className={`button ${status.expanded === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onExpand({name, type: testType || type}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.expanded === 'active' ? faDotCircle : faCircle} />
       </span>
       <span>Expanded</span>
     </button>
-    <button className={`button ${status.collapsed === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onCollapse({name, type, testType}) }}>
+    <button className={`button ${status.collapsed === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onCollapse({name, type: testType || type}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.collapsed === 'active' ? faDotCircle : faCircle} />
       </span>
@@ -92,13 +92,13 @@ const Toggles = ({index, onExpand, onCollapse, onShow, onHide, status, type, nam
     </button>
   </div>
   <div>
-    <button className={`button ${status.shown === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onShow({name, type, testType}) }}>
+    <button className={`button ${status.shown === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onShow({name, type: testType || type}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.shown === 'active' ? faDotCircle : faCircle} />
       </span>
       <span>Shown</span>
     </button>
-    <button className={`button ${status.hidden === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onHide({name, type, testType}) }}>
+    <button className={`button ${status.hidden === 'active' ? 'is-link' : 'is-light'} ${styles.statRadio(status.expanded)}`} onClick={() => { onHide({name, type: testType || type}) }}>
       <span className='icon'>
         <FontAwesomeIcon icon={status.hidden === 'active' ? faDotCircle : faCircle} />
       </span>
