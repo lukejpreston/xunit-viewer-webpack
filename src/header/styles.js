@@ -243,7 +243,10 @@ export default {
   heroBurgerMiddle: (active, hover) => `${css(styles.heroBurgerLine)} ${css(styles.heroBurgerMiddle)} ${css(styles[`heroBurgerMiddle-${active}`])} ${css(styles[`heroBurgerMiddle-${hover}`])} ${css(styles[`heroBurgerMiddle-${active}-${hover}`])}`,
   heroBurgerBottom: (active, hover) => `${css(styles.heroBurgerLine)} ${css(styles.heroBurgerBottom)} ${css(styles[`heroBurgerBottom-${active}`])} ${css(styles[`heroBurgerBottom-${hover}`])}`,
   heroBody: (active, size, status, xmlActive) => {
-    const activeStats = Object.keys(status).filter(key => status[key].active === 'active').length
+    let activeStats = 0
+    Object.keys(status).forEach(key => {
+      if (Object.keys(status[key]).some(t => status[key][t].active === 'active')) activeStats += 1
+    })
     return `${css(styles.heroBody)} ${css(styles[`heroBody-${active}-${size}-stats-${activeStats}-xml-${xmlActive}`])}`
   },
   stat: (active) => `${css(styles.stat)} ${css(styles[`stat-${active}`])}`,
