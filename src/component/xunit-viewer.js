@@ -5,9 +5,6 @@ import Error from './error'
 import Suites from './suites'
 import parser from './parser'
 import CodeMirror from 'codemirror'
-import '../node_modules/codemirror/lib/codemirror.css'
-import '../node_modules/codemirror/mode/xml/xml'
-import '../node_modules/codemirror/theme/dracula.css'
 
 const knownStatuses = ['pass', 'fail', 'error', 'skip']
 

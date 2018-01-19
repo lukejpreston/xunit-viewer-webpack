@@ -162,8 +162,8 @@ const singleFile = () => {
   const index = fs.readFileSync(indexPath).toString()
 
   let newIndex = index
-    .replace('<link href="/static/css/main.css" rel="stylesheet">', `<style>${css}</style>`)
-    .replace('<script type="text/javascript" src="/static/js/main.js"></script>', '')
+    .replace('<link href="/xunit-viewer/static/css/main.css" rel="stylesheet">', `<style>${css}</style>`)
+    .replace('<script type="text/javascript" src="/xunit-viewer/static/js/main.js"></script>', '')
     .replace('</body></html>', '')
 
   newIndex += `<script>${js}</script>`
